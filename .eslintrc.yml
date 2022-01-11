@@ -1,0 +1,113 @@
+{
+  parser: '@typescript-eslint/parser',
+  plugins: [
+      '@typescript-eslint'
+  ],
+  parserOptions: {
+    ecmaVersion: 2020,
+    sourceType: 'module'
+  },
+  env: {
+    es6: true,
+    node: true,
+    jest: true
+  },
+  rules: {
+    # To make the indentation at 2 spaces by default
+    "@typescript-eslint/indent": [
+        "error",
+        4,
+        { "SwitchCase": 1 },
+    ],
+    # To avoid unnecessary empty lines
+    no-multiple-empty-lines: [
+        'error',
+        { max: 1, maxEOF: 1 }
+    ],
+    # To remove space between the function name and the parenthesis
+    func-call-spacing: [
+        'error',
+        'never'
+    ],
+    # To remove unnecessary space in array ['foo', 'bar']
+    "array-bracket-spacing": [
+        "error",
+        "never"
+    ],
+    # To force space in object with curly braces
+    object-curly-spacing: [
+        'error',
+        'always'
+    ],
+    # To avoid space in `${template}`
+    "template-curly-spacing": [
+        "error",
+        "never"
+    ],
+    # To make sure there's only one space between words
+    space-unary-ops: [
+        'error',
+        { words: true, nonwords: false }
+    ],
+    # To for spacing around infix operators
+    "space-infix-ops": [
+        "error"
+    ],
+    # To limit to one space between { key: value }
+    key-spacing: [
+        'error',
+        { mode: strict }
+    ],
+    # To enforce consistent spacing before and after keywords
+    "keyword-spacing": [
+        "error"
+    ],
+    # To limit the maximum line length
+    max-len: [
+        'error',
+        { code: 150 }
+    ],
+    # To force the use of '==='
+    eqeqeq: [
+        'error',
+        'smart'
+    ],
+    # To force the use of 'const' when variable is never reassigned
+    prefer-const: [
+        'error'
+    ],
+    # To force single quotes
+    quotes: [
+        'error',
+        'single'
+    ],
+    # To force comma on last element in multiline object
+    comma-dangle: [
+        'warn',
+        'only-multiline'
+    ],
+    # To force semi colon
+    '@typescript-eslint/semi': [
+        'error',
+        'never'
+    ],
+    # With no semi colon
+    no-unexpected-multiline: [
+        'error',
+    ],
+    # To force the use of the shorthand syntax
+    object-shorthand: [
+        'error',
+        'always'
+    ],
+    # To avoid rename a reference to the same name on assignment
+    no-useless-rename: [
+        'error'
+    ],
+    # To limit depth of nested code blocks
+    max-depth: [
+        'error',
+        2
+    ]
+  }
+}

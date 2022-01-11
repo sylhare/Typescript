@@ -1,0 +1,20 @@
+{
+    "preset": "ts-jest",
+    "testRegex": "\\.(test|e2e)\\.ts$",
+    "moduleFileExtensions": ["ts", "js", "json"],
+    "collectCoverage": true,
+    "coveragePathIgnorePatterns": [
+        "<rootDir>/src/__tests__"
+    ],
+    "coverageReporters": ["text", "text-summary", "lcov"],
+    "coverageThreshold": {
+        "global": {
+            "branches": 85,
+            "lines": 85
+        }
+    },
+    "transform": {
+        "^.+\\.(ts|tsx)$": "ts-jest"
+    },
+    "watchPathIgnorePatterns": [".idea"]
+}
