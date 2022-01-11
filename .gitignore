@@ -35,5 +35,7 @@ typings/
 # Optional eslint cache
 .eslintcache
 
-package-lock.json # You should not git ignore that on real projects
+# You should not git ignore that on real projects
+package-lock.json
 .idea/*
+dist/*

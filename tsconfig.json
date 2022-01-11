@@ -12,7 +12,7 @@
 
     "declaration": true,                            /* Ensure that .d.ts files are created by tsc, but not .js files */
     "emitDeclarationOnly": true,
-    "isolatedModules": true,                        /* Ensure that Babel can safely transpile files in the TypeScript project */
+    "isolatedModules": false,                        /* Ensure that Babel can safely transpile files in the TypeScript project */
 
     /* Strict Type-Checking Options */
     "strict": true,                                 /* Enable all strict type-checking options. */

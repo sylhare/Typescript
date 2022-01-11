@@ -4,16 +4,13 @@
   "description": "Experience with Typescript",
   "main": "index.js",
   "scripts": {
+    "build": "tsc",
     "lint": "eslint --ext .ts src",
     "lint:fix": "eslint --fix src --ext=.ts",
     "test": "jest",
     "test:watch": "jest --verbose --detectOpenHandles",
     "test:cov": "jest --coverage",
-    "start": "npm run build:dist && node 'dist/index.js'",
-    "copy-files": "mkdir dist/resources || true && cp -R src/resources/** dist/resources/",
-    "start:dev": "npm run build:dev",
-    "build": "nodemon 'src/index.ts' --exec 'ts-node' src/index.ts -e ts,graphql",
-    "build:dist": "tsc && npm run copy-files"
+    "start": "ts-node src/index.ts"
   },
   "repository": {
     "type": "git",
@@ -25,6 +22,10 @@
   ],
   "author": "sylhare",
   "license": "MIT",
+  "dependencies": {
+    "ts-node": "^10.4.0",
+    "typescript": "4.5.4"
+  },
   "devDependencies": {
     "@types/jest": "^27.4.0",
     "@typescript-eslint/eslint-plugin": "^5.9.1",
