@@ -91,7 +91,7 @@
     # To force semi colon
     '@typescript-eslint/semi': [
         'error',
-        'never'
+        'always'
     ],
     # With no semi colon
     no-unexpected-multiline: [

@@ -6,7 +6,7 @@
   "scripts": {
     "build": "tsc",
     "lint": "eslint --ext .ts src",
-    "lint:fix": "eslint --fix src --ext=.ts",
+    "lint:fix": "eslint --fix src tests --ext=.ts",
     "test": "jest",
     "test:watch": "jest --verbose --detectOpenHandles",
     "test:cov": "jest --coverage",
