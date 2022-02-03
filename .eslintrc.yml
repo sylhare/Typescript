@@ -18,7 +18,7 @@
     # To make the indentation at 2 spaces by default
     "@typescript-eslint/indent": [
         "error",
-        4,
+        2,
         { "SwitchCase": 1 },
     ],
     # To avoid unnecessary empty lines
