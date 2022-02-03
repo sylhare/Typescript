@@ -1,6 +1,5 @@
 import { deadliestCreature, sea, SeaCreature } from '../../src/models/Sea';
 
-
 describe('reduce, map, filter', () => {
 
   describe('Sea creatures', () => {
@@ -17,6 +16,14 @@ describe('reduce, map, filter', () => {
       ]), []);
       expect(deadlyCreatures.length).toBe(1);
       expect(deadlyCreatures[0]).toBe(deadliestCreature);
+    });
+
+    it('maps the creatures to their deadliest instincts', () => {
+      const creatures = sea.map(creature => ({
+        ...creature,
+        type: `${creature.deadly ? 'Deadly' : 'Chill'} creature`
+      }));
+      creatures.forEach(creature => expect(creature.type).toBeDefined());
     });
 
     it('has deadly creatures', () => {
