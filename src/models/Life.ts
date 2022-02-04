@@ -23,3 +23,9 @@ export const fruitBasket = {
   banana: '🍌',
   kiwi: '🥝',
 };
+
+export const listOfFruits = [
+  { name: 'apple', emoji: '🍎' },
+  { name: 'banana', emoji: '🍌' },
+  { name: 'kiwi', emoji: '🥝' },
+];

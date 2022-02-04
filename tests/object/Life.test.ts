@@ -1,4 +1,4 @@
-import { fruitBasket, people, workTripHoliday } from '../../src/models/Life';
+import { fruitBasket, listOfFruits, people, workTripHoliday } from '../../src/models/Life';
 
 describe('Life', () => {
 
@@ -8,11 +8,10 @@ describe('Life', () => {
   it('life works in mysterious ways', () =>
     expect(people.map(it => ({ ...it, hobby: workTripHoliday }))).toMatchObject(people));
 
-  it('when life gives you a fruit basket ...', () =>
-    expect(Object.entries(fruitBasket).map(([key, value]) => ({ name: key, emoji: value }))).toEqual([
-      { name: 'apple', emoji: '🍎' },
-      { name: 'banana' , emoji: '🍌' },
-      { name: 'kiwi' , emoji: '🥝' },
-    ])
+  it('takes a fruit basket into a list of fruits', () =>
+    expect(Object.entries(fruitBasket).map(([key, value]) => ({ name: key, emoji: value }))).toEqual(listOfFruits));
+
+  it('takes a list of fruits into a fruit basket', () =>
+    expect(Object.fromEntries(listOfFruits.map(it => [it.name, it.emoji]))).toEqual(fruitBasket)
   );
 });
