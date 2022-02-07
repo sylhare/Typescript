@@ -30,4 +30,18 @@ describe('reduce, map, filter', () => {
       expect(sea.reduce((a, b) => a || b.deadly, false)).toBe(true);
     });
   });
+
+  describe('Reducing creatures', () => {
+
+    it('reduces creatures in object of deadly and safe', () => {
+      const reducedCreatures = sea.reduce((result, creature) => {
+        creature.deadly ? result.deadly.push(creature) : result.safe.push(creature);
+        return result;
+      }, { deadly: [] as SeaCreature[], safe: [] as SeaCreature[] });
+
+      expect(reducedCreatures).toMatchObject({ deadly: [deadliestCreature] });
+      expect(reducedCreatures.safe.length).toEqual(sea.length - 1);
+    });
+    
+  });
 });
