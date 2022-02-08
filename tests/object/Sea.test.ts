@@ -43,5 +43,16 @@ describe('Sea creatures', () => {
       expect(reducedCreatures).toMatchObject({ deadly: [deadliestCreature] });
       expect(reducedCreatures.safe.length).toEqual(sea.length - 1);
     });
+
+    it('puts creatures in a safe or deadly object in a different way', () => {
+      const reducedCreatures = sea.reduce((result, creature) => {
+        return creature.deadly ?
+          { ...result, deadly: [...result.deadly, creature] } :
+          { ...result, safe: [...result.safe, creature] };
+      }, { deadly: [] as SeaCreature[], safe: [] as SeaCreature[] });
+
+      expect(reducedCreatures).toMatchObject({ deadly: [deadliestCreature] });
+      expect(reducedCreatures.safe.length).toEqual(sea.length - 1);
+    });
   });
 });
