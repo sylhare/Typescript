@@ -1,11 +1,11 @@
 describe('Pardon my french regex', () => {
 
   function frenchex(input: string) {
-    return input.replace(/\b(\w)(\w+)\b/g, (word: string, first: string, rest: string) => {
-      if (/[aeiou]/i.test(first)) return word + 'way';
+    return input.replace(/\b(\w)(\w+)\b/g, (word: string, first: string, _: string) => {
       const groups = word.match(/\b([^\W_aeiou]+)(\w+)\b/)!!;
 
-      return groups[2].replace(/^\w/, x => /[A-Z]/.test(first) ? x.toUpperCase() : x) +
+      return /[aeiou]/i.test(first) ? word + 'way' :
+        groups[2].replace(/^\w/, x => /[A-Z]/.test(first) ? x.toUpperCase() : x) +
         groups[1].toLowerCase() + 'ay';
     });
   }
