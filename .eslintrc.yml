@@ -13,13 +13,13 @@
     node: true,
     jest: true
   },
-  "extends": ["plugin:jest/recommended"],
+  extends: ['plugin:jest/recommended'],
   rules: {
     # To make the indentation at 2 spaces by default
-    "@typescript-eslint/indent": [
-        "error",
+    '@typescript-eslint/indent': [
+        'error',
         2,
-        { "SwitchCase": 1 },
+        { 'SwitchCase': 1 },
     ],
     # To avoid unnecessary empty lines
     no-multiple-empty-lines: [
@@ -32,9 +32,9 @@
         'never'
     ],
     # To remove unnecessary space in array ['foo', 'bar']
-    "array-bracket-spacing": [
-        "error",
-        "never"
+    array-bracket-spacing: [
+        'error',
+        'never'
     ],
     # To force space in object with curly braces
     object-curly-spacing: [
@@ -42,9 +42,9 @@
         'always'
     ],
     # To avoid space in `${template}`
-    "template-curly-spacing": [
-        "error",
-        "never"
+    template-curly-spacing: [
+        'error',
+        'never'
     ],
     # To make sure there's only one space between words
     space-unary-ops: [
@@ -52,8 +52,8 @@
         { words: true, nonwords: false }
     ],
     # To for spacing around infix operators
-    "space-infix-ops": [
-        "error"
+    space-infix-ops: [
+        'error'
     ],
     # To limit to one space between { key: value }
     key-spacing: [
@@ -61,8 +61,13 @@
         { mode: strict }
     ],
     # To enforce consistent spacing before and after keywords
-    "keyword-spacing": [
-        "error"
+    keyword-spacing: [
+        'error'
+    ],
+    # To enforce space after comma
+    comma-spacing: [
+        'error',
+        { 'before': false, 'after': true }
     ],
     # To limit the maximum line length
     max-len: [
