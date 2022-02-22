@@ -5,12 +5,13 @@ describe('Pardon my french', () => {
     const special = [',', '.', '?', '!'];
 
     return input.split(' ').map(word => {
-      if (vowels.includes(word[0])) return word + 'way';
       const wordArray = word.split('');
       const suffix = word.slice(0, wordArray.findIndex(e => vowels.includes(e)));
       let  prefix =  word.slice(suffix.length, suffix.length + 1), middle = '', end = '';
-      if (suffix[0].toUpperCase() === suffix[0]) prefix = prefix.toUpperCase();
       wordArray.forEach(char => special.includes(char) ? end += char : middle += char);
+
+      if (vowels.includes(word[0].toLowerCase())) return middle + 'way' + end;
+      if (suffix[0].toUpperCase() === suffix[0]) prefix = prefix.toUpperCase();
 
       return prefix + middle.slice(suffix.length + 1, word.length) + suffix.toLowerCase() + 'ay' + end;
     }).join(' ');
@@ -34,6 +35,11 @@ describe('Pardon my french', () => {
 
   it('should work for multiple consonant', () => {
     expect(french('striking thunder')).toBe('ikingstray underthay');
+  });
+
+  it('should work for punctuation and vowel', () => {
+    expect(french('Oh!')).toBe('Ohway!');
+    expect(french('oh!')).toBe('ohway!');
   });
 
   it('should work with punctuation', () => {
