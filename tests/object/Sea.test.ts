@@ -21,6 +21,21 @@ describe('Sea creatures', () => {
   });
 
   describe('Reducing creatures', () => {
+    it('reduces to default', () => {
+      const deadlyCreature = sea.reduce((result, _) => result, deadliestCreature);
+      expect(deadlyCreature).toEqual(deadliestCreature);
+    });
+
+    it('reduces to default no initial value', () => {
+      const deadlyCreature = sea.reduce((result, _) => result);
+      expect(deadlyCreature).toBe(sea[0]);
+    });
+
+    it('reduces to last', () => {
+      const deadlyCreature = sea.reduce((_: SeaCreature, current: SeaCreature) => current);
+      expect(deadlyCreature).toBe(sea[sea.length - 1]);
+    });
+
     it('reduces not deadly out', () => {
       const deadlyCreatures = sea.reduce((sortedCreatures: SeaCreature[], currentCreature) => ([
         ...sortedCreatures,
@@ -45,11 +60,22 @@ describe('Sea creatures', () => {
     });
 
     it('puts creatures in a safe or deadly object in a different way', () => {
-      const reducedCreatures = sea.reduce((result, creature) => {
-        return creature.deadly ?
-          { ...result, deadly: [...result.deadly, creature] } :
-          { ...result, safe: [...result.safe, creature] };
-      }, { deadly: [] as SeaCreature[], safe: [] as SeaCreature[] });
+      const reducedCreatures = sea.reduce((result, creature) => creature.deadly ?
+        { ...result, deadly: [...result.deadly, creature] } :
+        { ...result, safe: [...result.safe, creature] },
+      { deadly: [] as SeaCreature[], safe: [] as SeaCreature[] });
+
+      expect(reducedCreatures).toMatchObject({ deadly: [deadliestCreature] });
+      expect(reducedCreatures.safe.length).toEqual(sea.length - 1);
+    });
+
+    it('puts creatures in a safe or deadly object extracted', () => {
+      type GroupedByDeadly = { deadly: SeaCreature[], safe: SeaCreature[] };
+      const groupByDeadly = (result: GroupedByDeadly, creature: SeaCreature) => creature.deadly ?
+        { ...result, deadly: [...result.deadly, creature] } :
+        { ...result, safe: [...result.safe, creature] };
+
+      const reducedCreatures = sea.reduce(groupByDeadly, { deadly: [], safe: [] });
 
       expect(reducedCreatures).toMatchObject({ deadly: [deadliestCreature] });
       expect(reducedCreatures.safe.length).toEqual(sea.length - 1);
