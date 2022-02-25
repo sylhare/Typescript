@@ -70,15 +70,35 @@ describe('Sea creatures', () => {
     });
 
     it('puts creatures in a safe or deadly object extracted', () => {
-      type GroupedByDeadly = { deadly: SeaCreature[], safe: SeaCreature[] };
-      const groupByDeadly = (result: GroupedByDeadly, creature: SeaCreature) => creature.deadly ?
+      type DeadlySafe = { deadly: SeaCreature[], safe: SeaCreature[] };
+      const creatureReducer = (result: DeadlySafe, creature: SeaCreature) => creature.deadly ?
         { ...result, deadly: [...result.deadly, creature] } :
         { ...result, safe: [...result.safe, creature] };
 
-      const reducedCreatures = sea.reduce(groupByDeadly, { deadly: [], safe: [] });
+      const reducedCreatures = sea.reduce(creatureReducer, { deadly: [], safe: [] });
 
       expect(reducedCreatures).toMatchObject({ deadly: [deadliestCreature] });
       expect(reducedCreatures.safe.length).toEqual(sea.length - 1);
+    });
+
+    it('groups by type', () => {
+      const groupedCreatures = sea.reduce((result: any, creature) => ({
+        ...result,
+        [creature.type]: [...(result[creature.type] || []), creature]
+      }), {});
+
+      expect(groupedCreatures).toMatchSnapshot();
+      expect(groupedCreatures.shark.length).toEqual(1);
+      expect(groupedCreatures).toBeInstanceOf(Object);
+    });
+
+    it('groups creatures in a map per type', () => {
+      const groupedCreatures = sea.reduce((typedCreatures, creature) =>
+        typedCreatures.set(creature.type, [...typedCreatures.get(creature.type) || [], creature]),
+      new Map());
+      expect(groupedCreatures).toMatchSnapshot();
+      expect(groupedCreatures.get('shark').length).toEqual(1);
+      expect(groupedCreatures).toBeInstanceOf(Map);
     });
   });
 });
