@@ -36,6 +36,11 @@ describe('Rotation', () => {
     expect(rotate('1 pieces of 54gr')).toEqual('6 cvrprf bs 09te');
   });
 
+  it('works on it all', () => {
+    expect(rotate('WhUt an Am4Zing! Sho0Ww?!')).toEqual('JuHg na Nz9Mvat! Fub5Jj?!');
+    expect(rt('WhUt an Am4Zing! Sho0Ww?!')).toEqual('JuHg na Nz9Mvat! Fub5Jj?!');
+  });
+
   describe('rotN', () => {
     it('rotates numbers by 5 (default)', () => {
       expect(rotN(0)).toEqual(5);
@@ -61,4 +66,13 @@ describe('Rotation', () => {
           .toEqual(expected.toUpperCase().charCodeAt(0)));
     });
   });
+
+  /**
+   * rotate but I need... to... write... less... lines... 🤪
+   * @param input
+   */
+  const rt = (input: string) => input.split(' ').map(word => [...word]
+    .map(letter => /[,.?!]/.test(letter) ? letter : /\d/.test(letter) ? `${rotN(parseInt(letter))}` : rot13(letter))
+    .join('')).join(' ');
+
 });

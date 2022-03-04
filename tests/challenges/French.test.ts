@@ -5,14 +5,12 @@ describe('Pardon my french', () => {
     const special = [',', '.', '?', '!'];
 
     return input.split(' ').map(word => {
-      const wordArray = word.split('');
-      const suffix = word.slice(0, wordArray.findIndex(e => vowels.includes(e)));
+      const suffix = word.slice(0, [...word].findIndex(e => vowels.includes(e)));
       let  prefix =  word.slice(suffix.length, suffix.length + 1), middle = '', end = '';
-      wordArray.forEach(char => special.includes(char) ? end += char : middle += char);
+      [...word].forEach(char => special.includes(char) ? end += char : middle += char);
 
       if (vowels.includes(word[0].toLowerCase())) return middle + 'way' + end;
       if (suffix[0].toUpperCase() === suffix[0]) prefix = prefix.toUpperCase();
-
       return prefix + middle.slice(suffix.length + 1, word.length) + suffix.toLowerCase() + 'ay' + end;
     }).join(' ');
   }
