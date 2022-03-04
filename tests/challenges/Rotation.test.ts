@@ -10,6 +10,8 @@ describe('Rotation', () => {
     }).join('')).join(' ');
   }
 
+  const rotN = (number: number, rotation = 5, base = 0, range = 10) => ((number - base + rotation) % range) + base;
+
   it('rotates word', () => {
     expect(rotate('hello')).toEqual('uryyb');
   });
@@ -24,5 +26,18 @@ describe('Rotation', () => {
 
   it('rotates handle punctuation', () => {
     expect(rotate('Hello, world!')).toEqual('Uryyb, jbeyq!');
+  });
+
+  describe('rotN', () => {
+    it('rotates numbers by 5', () => {
+      expect(rotN(0)).toEqual(5);
+      expect(rotN(5)).toEqual(0);
+      expect(rotN(9)).toEqual(4);
+    });
+
+    it('rotates numbers by 2', () => {
+      expect(rotN(0, 2)).toEqual(2);
+      expect(rotN(9, 2)).toEqual(1);
+    });
   });
 });
