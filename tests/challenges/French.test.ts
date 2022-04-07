@@ -11,7 +11,7 @@ describe('Pardon my french', () => {
 
       if (vowels.includes(word[0].toLowerCase())) return middle + 'way' + end;
       if (suffix[0].toUpperCase() === suffix[0]) prefix = prefix.toUpperCase();
-      return prefix + middle.slice(suffix.length + 1, word.length) + suffix.toLowerCase() + 'ay' + end;
+      return prefix + middle.slice(suffix.length + 1) + suffix.toLowerCase() + 'ay' + end;
     }).join(' ');
   }
 
