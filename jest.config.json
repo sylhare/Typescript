@@ -3,9 +3,10 @@
     "testRegex": "\\.(test|e2e)\\.ts$",
     "moduleFileExtensions": ["ts", "js", "json"],
     "collectCoverage": true,
-    "coveragePathIgnorePatterns": [
-        "<rootDir>/src/__tests__"
+    "collectCoverageFrom": [
+        "src/**/*.ts"
     ],
+    "coveragePathIgnorePatterns": [],
     "coverageReporters": ["text", "text-summary", "lcov"],
     "coverageThreshold": {
         "global": {
