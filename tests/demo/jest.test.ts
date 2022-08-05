@@ -12,6 +12,7 @@ describe('It is jest an excuse', () => {
 
   it('should be a date', () => {
     expect(new Date()).toBeDate();
+    expect('hello').not.toBeDate();
   });
 
   it.each([null, undefined, ''])('"%s" should be falsy', (input: any) => {
