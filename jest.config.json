@@ -4,7 +4,7 @@
     "moduleFileExtensions": ["ts", "js", "json"],
     "collectCoverage": true,
     "collectCoverageFrom": [
-        "src/**/*.ts"
+        "src/**/*.ts", "!src/index.ts"
     ],
     "coveragePathIgnorePatterns": [],
     "coverageReporters": ["text", "text-summary", "lcov"],
