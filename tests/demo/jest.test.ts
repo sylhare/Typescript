@@ -10,6 +10,24 @@ describe('It is jest an excuse', () => {
     expect('hello').toEqual('hello');
   });
 
+  describe('toBe vs toEqual', () => {
+    const hello = { hello: 'world' };
+    it('should work', () => {
+      expect(hello).toBe(hello);
+      expect(hello).toEqual({ hello: 'world' });
+      expect(hello).toEqual(hello);
+    });
+
+    it.skip('should not work', () => {
+      expect(hello).toBe({ hello: 'world' });
+    });
+
+    it.skip('should not work again', () => {
+      const allo = { ...hello, allo: 'le monde' };
+      expect(hello).toBe(allo);
+    });
+  });
+
   it('should be a date', () => {
     expect(new Date()).toBeDate();
     expect('hello').not.toBeDate();
