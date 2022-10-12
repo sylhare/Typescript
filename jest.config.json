@@ -6,6 +6,9 @@
     "collectCoverageFrom": [
         "src/**/*.ts", "!src/index.ts"
     ],
+    "setupFilesAfterEnv": [
+        "jest-extended/all"
+    ],
     "coveragePathIgnorePatterns": [],
     "coverageReporters": ["text", "text-summary", "lcov"],
     "coverageThreshold": {
