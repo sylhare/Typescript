@@ -8,7 +8,7 @@ export class MarketService {
   readonly url: string;
 
   constructor() {
-    this.url = process.env.url ?? 'localhost';
+    this.url = 'localhost';
   }
 
   info() {

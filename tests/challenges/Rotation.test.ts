@@ -1,6 +1,6 @@
 describe('Rotation', () => {
 
-  function rotate(input: string) {
+  function rotate(input: string): string {
     return input.split(' ').map(word => [...word].map(letter => {
       if (/[,.?!]/.test(letter)) return letter;
       if (/\d/.test(letter)) return `${rotN(parseInt(letter), 5)}`;

@@ -1,6 +1,6 @@
 describe('Pardon my french', () => {
 
-  function french(input: string) {
+  function french(input: string): string {
     const vowels = ['a', 'e', 'i', 'o', 'u', 'y'];
     const special = [',', '.', '?', '!'];
 
