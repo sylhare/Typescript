@@ -50,6 +50,23 @@ describe('Encoder', () => {
     }
     return result + (count ? count + current : '');
   }
+
+  type Result = { encoded: string, size: number, letter: string };
+  function encodeReduce(input: string): string {
+    const result = input.split('').reduce((result: Result, letter) => {
+      const isNewLetter = result.letter !== letter && result.size > 0;
+      return {
+        encoded: result.encoded + (isNewLetter ? result.size + result.letter : ''),
+        letter, size: (isNewLetter ? 1 : ++result.size),
+      };
+    }, { encoded: '', size: 0, letter: '' });
+    return result.encoded + (result.size ? result.size + result.letter : '');
+  }
+
+  function encodeClass(input: string): string {
+    return Encoder.encode(input);
+  }
+
   describe.each([encodeFor, encodeReduce, encodeClass])('Test encoding functions %s', (encode) => {
 
     it('can encode a string', () => {
