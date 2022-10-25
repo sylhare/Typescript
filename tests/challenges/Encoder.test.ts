@@ -1,5 +1,5 @@
 describe('Encoder', () => {
-  function encode(input: string): string {
+  function encodeFor(input: string): string {
     let result = '', current = '', count = 0;
     for (const char of input) {
       if (char !== current && count > 0) {
@@ -11,6 +11,8 @@ describe('Encoder', () => {
     }
     return result + (count ? count.toString() + current : '');
   }
+  describe.each([encodeFor, encodeReduce, encodeClass])('Test encoding functions %s', (encode) => {
+
     it('can encode a string', () => {
       expect(encode('aaaabbccc')).toEqual('4a2b3c');
     });
@@ -30,3 +32,5 @@ describe('Encoder', () => {
     it('handles nothing', () => {
       expect(encode('')).toEqual('');
     });
+  });
+});
