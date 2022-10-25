@@ -1,4 +1,43 @@
 describe('Encoder', () => {
+
+  class Encoder {
+    private current: { size: number; letter: string } = { size: 0, letter: '' };
+    private encoded: string = '';
+
+    static encode(input: string): string {
+      const result = input.split('').reduce(Encoder.reducer, new Encoder());
+      if (result.isNotCurrentEmpty()) {
+        result.encodeCurrent();
+      }
+      return result.encoded;
+    }
+
+    private static reducer(result: Encoder, letter: string): Encoder {
+      if (result.isSameLetter(letter) && result.isNotCurrentEmpty()) {
+        result.encodeCurrent();
+      }
+      result.updateCurrent(letter);
+      return result;
+    }
+
+    private isNotCurrentEmpty(): boolean {
+      return this.current.size > 0;
+    }
+
+    private isSameLetter(letter: string): boolean {
+      return this.current.letter !== letter;
+    }
+
+    private encodeCurrent(): void {
+      this.encoded += this.current.size + this.current.letter;
+      this.current.size = 0;
+    }
+
+    private updateCurrent(letter: string) {
+      this.current = { letter, size: ++this.current.size };
+    }
+  }
+
   function encodeFor(input: string): string {
     let result = '', current = '', count = 0;
     for (const char of input) {
@@ -9,7 +48,7 @@ describe('Encoder', () => {
       current = char;
       ++count;
     }
-    return result + (count ? count.toString() + current : '');
+    return result + (count ? count + current : '');
   }
   describe.each([encodeFor, encodeReduce, encodeClass])('Test encoding functions %s', (encode) => {
 
