@@ -1,4 +1,4 @@
-describe('Pardon my french', () => {
+describe('Word Cut', () => {
 
   function wordCut(input: string): Set<String> {
     return new Set(input.replace(/[!?.,]/g, '').split(' '));
