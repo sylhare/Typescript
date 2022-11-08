@@ -1,0 +1,26 @@
+{
+  "id": "d0c6524-c0e8-gmpt-58e4-f1bb586eg6f7",
+  "accountId": "12111098",
+  "data": {
+    "input": [
+      {
+        "name": "artifact",
+        "revision": "some-complex-reference",
+        "location": {
+          "type": "Storage",
+          "storage": {
+            "id": "my-storage-id",
+            "objectKey": "my-storage-object-key"
+          }
+        }
+      }
+    ],
+    "output": null,
+    "artifactCredentials": {
+      "accessKeyId": "1234-access-key-id",
+      "secretAccessKey": "1234-secret-access-key",
+      "sessionToken": "1234-session-token",
+      "expirationTime": 1675494418000
+    }
+  }
+}
