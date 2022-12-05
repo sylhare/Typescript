@@ -15,3 +15,23 @@ export class ExampleFactory implements TKafkaFactory {
     return new TProducer(this.kafkaConfig, configuration);
   }
 }
+
+export class ExampleService {
+  isConnected: boolean;
+
+  constructor(readonly producer: SimpleProducer, readonly consumer: SimpleConsumer) {
+    this.isConnected = false;
+  }
+
+  start(): Promise<void> {
+    return this.producer.connect().then(() => this.consumer.connect()).then(() => {this.isConnected = true; });
+  }
+
+  send(messages: Message[]) {
+    return this.producer.sendMessages(messages);
+  }
+
+  stop(): Promise<void> {
+    return this.consumer.disconnect().then(() => this.producer.disconnect()).then(() => {this.isConnected = false; });
+  }
+}

@@ -23,6 +23,7 @@
   "author": "sylhare",
   "license": "MIT",
   "dependencies": {
+    "kafkajs": "^2.2.3"
   },
   "devDependencies": {
     "@types/jest": "^27.4.0",
