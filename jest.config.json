@@ -9,7 +9,7 @@
     "jest-extended/all"
   ],
   "collectCoverage": true,
-  "collectCoverageFrom": ["src/**/*.ts", "!src/index.ts"],
+  "collectCoverageFrom": ["src/**/*.ts", "!src/index.ts", "!src/kafka/*.ts"],
   "coveragePathIgnorePatterns": [],
   "coverageReporters": ["text", "text-summary", "lcov"],
   "coverageThreshold": {

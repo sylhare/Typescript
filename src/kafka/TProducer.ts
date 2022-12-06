@@ -1,4 +1,4 @@
-import { Kafka, Message, Producer } from 'kafkajs';
+import { Kafka, Message, Partitioners, Producer } from 'kafkajs';
 import { SimpleProducer } from './TKafkaFactory';
 import { TKafkaConfig } from './TKafkaConfig';
 
@@ -13,7 +13,7 @@ export class TProducer implements SimpleProducer {
     kafkaConfig: TKafkaConfig,
     protected readonly config: TProducerConfiguration,
   ) {
-    this.producer = new Kafka(kafkaConfig).producer();
+    this.producer = new Kafka(kafkaConfig).producer({ createPartitioner: Partitioners.LegacyPartitioner });
   }
 
   sendMessages(messages: any[]): Promise<void> {
