@@ -1,5 +1,6 @@
 describe('Encoder', () => {
 
+  // Solution 1
   class Encoder {
     private current: { size: number; letter: string } = { size: 0, letter: '' };
     private encoded: string = '';
@@ -38,6 +39,7 @@ describe('Encoder', () => {
     }
   }
 
+  // Solution 2
   function encodeFor(input: string): string {
     let result = '', current = '', count = 0;
     for (const char of input) {
@@ -51,6 +53,7 @@ describe('Encoder', () => {
     return result + (count ? count + current : '');
   }
 
+  // Solution 3
   type Result = { encoded: string, size: number, letter: string };
   function encodeReduce(input: string): string {
     const result = input.split('').reduce((result: Result, letter) => {

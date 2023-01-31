@@ -17,7 +17,7 @@ describe.skip('Kafka tests', () => {
       .withExposedPorts(9092, 9093, 2181)
       .start();
     const config = {
-      brokers: [`BROKER://${kafka.getHost()}:${kafka.getMappedPort(9093)}`],
+      brokers: [`${kafka.getHost()}:${kafka.getMappedPort(9093)}`],
       clientId: 'test-container-kafka-client'
     };
 
