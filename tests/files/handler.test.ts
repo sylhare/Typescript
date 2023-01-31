@@ -48,5 +48,11 @@ describe('Files handler', function () {
       });
       expect(JSON.parse(bufferBuffer.toString())).toEqual({ hello: 'world' });
     });
+
+    it('transforms buffered data array into an object', () => {
+      expect(JSON.parse(Buffer.from(
+        [123, 34, 104, 101, 108, 108, 111, 34, 58, 34, 119, 111, 114, 108, 100, 34, 125]
+      ).toString())).toEqual({ hello: 'world' });
+    });
   });
 });
