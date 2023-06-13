@@ -1,3 +1,23 @@
 {
-  "name": "ts-monorepo"
+  "name": "ts-monorepo",
+  "description": "TypeScript monorepo",
+  "private": true,
+  "workspaces": [
+    "apps/*"
+  ],
+  "scripts": {
+    "lint": "eslint --ext js,ts,tsx .",
+    "test": "jest"
+  },
+  "devDependencies": {
+    "@types/jest": "^27.4.0",
+    "@typescript-eslint/eslint-plugin": "^5.59.1",
+    "@typescript-eslint/parser": "^5.59.1",
+    "eslint": "^8.39.0",
+    "eslint-plugin-jest": "^27.2.1",
+    "jest": "^27.4.7",
+    "ts-jest": "^27.1.2",
+    "ts-node": "^10.9.1",
+    "typescript": "4.7.4"
+  }
 }
