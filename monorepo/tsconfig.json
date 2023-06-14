@@ -2,9 +2,10 @@
   "extends": "./tsconfig.build.json",
 
   "compilerOptions": {
-    "outDir": "build",
+    "outDir": "dist",
     "baseUrl": ".",
     "paths": {
+      "@monorepo/*": ["libs/*/src"]
     },
     "noEmit": true
   }
