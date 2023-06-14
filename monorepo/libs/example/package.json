@@ -1,0 +1,12 @@
+{
+  "name": "@monorepo/example",
+  "version": "1.0.0",
+  "main": "dist/index",
+  "types": "dist/index",
+  "files": [
+    "dist"
+  ],
+  "devDependencies": {
+    "typescript": "~4.9.0"
+  }
+}
