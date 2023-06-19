@@ -3,17 +3,19 @@ import { up } from '@monorepo/example';
 
 export const app = express();
 
-app.get('/.well-known/health', (req: Request, res: Response): void => {
-  res.status(200).send(up);
-});
+export const addPaths = (app: express.Application): void => {
+  app.get('/.well-known/health', (req: Request, res: Response): void => {
+    res.status(200).send(up);
+  });
 
-app.get('/hello', (req: Request, res: Response): void => {
-  res.send(`Hello ${req.query.name}\n`);
-});
+  app.get('/hello', (req: Request, res: Response): void => {
+    res.send(`Hello ${req.query.name}\n`);
+  });
 
-app.get('/', (req: Request, res: Response): void => {
-  res.send('App is running');
-});
+  app.get('/', (req: Request, res: Response): void => {
+    res.send('App is running');
+  });
+};
 
 export const publicPath = [
   '/.well-known/health',

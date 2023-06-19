@@ -1,6 +1,7 @@
 // eslint-disable-next-line jest/no-jest-import
 import type { Config } from 'jest';
 import { defaults } from 'jest-config';
+import { pathsToModuleNameMapper } from 'ts-jest';
 
 const config: Config = {
   verbose: true,
@@ -35,7 +36,13 @@ const config: Config = {
   ],
   watchPathIgnorePatterns: [
     '.idea'
-  ]
+  ],
+  moduleNameMapper: pathsToModuleNameMapper({
+    '@monorepo/*': ['libs/*/src']
+  }, {
+    // This has to match the baseUrl defined in tsconfig.json.
+    prefix: '<rootDir>',
+  }),
 };
 
 export default config;
