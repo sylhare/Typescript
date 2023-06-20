@@ -1,0 +1,15 @@
+{
+  "name": "jest-demo",
+  "version": "1.0.0",
+  "description": "demo jest",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com-sylhare:sylhare/Typescript.git"
+  },
+  "keywords": [
+    "Typescript",
+    "fun"
+  ],
+  "author": "sylhare",
+  "license": "MIT"
+}

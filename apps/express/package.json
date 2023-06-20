@@ -14,6 +14,7 @@
     "jwks-rsa": "^3.0.1"
   },
   "devDependencies": {
+    "@types/supertest": "^2.0.12",
     "@types/node": "~18.16.0",
     "supertest": "^6.3.3",
     "ts-node": "~10.9.0",

@@ -1,4 +1,3 @@
-// eslint-disable-next-line jest/no-jest-import
 import type { Config } from 'jest';
 import { defaults } from 'jest-config';
 import { pathsToModuleNameMapper } from 'ts-jest';
@@ -11,8 +10,7 @@ const projects = [
     moduleNameMapper: pathsToModuleNameMapper({
       '@monorepo/*': ['libs/*/src']
     }, {
-      // This has to match the baseUrl defined in tsconfig.json.
-      prefix: '<rootDir>/monorepo/../',
+      prefix: '<rootDir>/Typescript/../',
     }),
     testMatch: ['<rootDir>/apps/express/**/*.test.ts'],
   },

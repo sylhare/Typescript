@@ -1,0 +1,27 @@
+{
+  "name": "kafka",
+  "version": "1.0.0",
+  "description": "kafkajs consumer and producer library",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com-sylhare:sylhare/Typescript.git"
+  },
+  "keywords": [
+    "Typescript",
+    "fun"
+  ],
+  "author": "sylhare",
+  "license": "MIT",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "cd ../../ & jest --testPathPattern=kafka/*"
+  },
+  "dependencies": {
+    "kafkajs": "^2.2.3"
+  },
+  "devDependencies": {
+    "testcontainers": "^9.0.1"
+  }
+}
