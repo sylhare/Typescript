@@ -1,41 +1,31 @@
 {
-  "name": "typescript",
-  "version": "0.0.0",
-  "description": "Experience with Typescript",
-  "main": "index.js",
-  "scripts": {
-    "build": "tsc",
-    "lint": "eslint --ext .ts src",
-    "lint:fix": "eslint --fix src tests --ext=.ts",
-    "test": "jest",
-    "test:watch": "jest --verbose --detectOpenHandles",
-    "test:cov": "jest --coverage",
-    "start": "ts-node src/index.ts"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git@github.com-sylhare:sylhare/Typescript.git"
-  },
-  "keywords": [
-    "Typescript",
-    "fun"
+  "name": "ts-monorepo",
+  "description": "TypeScript monorepo",
+  "private": true,
+  "workspaces": [
+    "apps/*",
+    "libs/*"
   ],
-  "author": "sylhare",
-  "license": "MIT",
-  "dependencies": {
-    "kafkajs": "^2.2.3"
+  "scripts": {
+    "lint": "eslint --ext js,ts,tsx .",
+    "test": "jest",
+    "test:express": "jest --selectProjects=express",
+    "test:jest": "jest --selectProjects=jest",
+    "test:kafka": "jest --selectProjects=kafka",
+    "test:quizz": "jest --selectProjects=quizz",
+    "build": "tsc"
   },
   "devDependencies": {
     "@types/jest": "^27.4.0",
-    "@typescript-eslint/eslint-plugin": "^5.9.1",
-    "@typescript-eslint/parser": "^5.9.1",
-    "eslint": "^7.32.0",
-    "eslint-plugin-jest": "^26.0.0",
-    "jest": "^27.4.7",
+    "@types/supertest": "^2.0.12",
+    "@typescript-eslint/eslint-plugin": "^5.59.1",
+    "@typescript-eslint/parser": "^5.59.1",
+    "eslint": "^8.39.0",
+    "eslint-plugin-jest": "^27.2.1",
+    "jest": "^29.5.0",
     "jest-extended": "^3.1.0",
-    "testcontainers": "^9.0.1",
-    "ts-jest": "^27.1.2",
+    "ts-jest": "^29.1.0",
     "ts-node": "^10.9.1",
-    "typescript": "4.5.4"
+    "typescript": "4.7.4"
   }
 }

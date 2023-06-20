@@ -1,0 +1,13 @@
+{
+  "extends": "../../tsconfig.json",
+  "compilerOptions": {
+    "target": "ES2020",
+    "module": "commonjs",
+    "lib": ["WebWorker","es6", "es2019"],
+    "resolveJsonModule": true,
+    "types": [
+      "jest",  "jest-extended"
+    ],
+  },
+  "files": ["global.d.ts"]
+}
