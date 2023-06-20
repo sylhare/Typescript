@@ -1,0 +1,37 @@
+{
+  "name": "typescript",
+  "version": "0.0.0",
+  "description": "Experience with Typescript",
+  "main": "index.js",
+  "scripts": {
+    "build": "../../node_modules/.bin/tsc",
+    "lint": "../../node_modules/.bin/eslint --ext .ts src",
+    "lint:fix": "../../node_modules/.bin/eslint --fix src tests --ext=.ts",
+    "test": "../../node_modules/.bin/jest",
+    "test:watch": "../../node_modules/.bin/jest --verbose --detectOpenHandles",
+    "test:cov": "../../node_modules/.bin/jest --coverage",
+    "start": "../../node_modules/.bin/ts-node src/index.ts"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com-sylhare:sylhare/Typescript.git"
+  },
+  "keywords": [
+    "Typescript",
+    "fun"
+  ],
+  "author": "sylhare",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/jest": "^27.4.0",
+    "@typescript-eslint/eslint-plugin": "^5.9.1",
+    "@typescript-eslint/parser": "^5.9.1",
+    "eslint": "^7.32.0",
+    "eslint-plugin-jest": "^26.0.0",
+    "jest": "^27.4.7",
+    "jest-extended": "^3.1.0",
+    "ts-jest": "^27.1.2",
+    "ts-node": "^10.9.1",
+    "typescript": "4.5.4"
+  }
+}
