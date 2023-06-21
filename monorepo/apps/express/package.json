@@ -4,7 +4,7 @@
   "private": true,
   "version": "1.0.0",
   "scripts": {
-    "test": "cd ../../ & jest --testPathPattern=express/*"
+    "test": "jest --config=../../jest.config.ts --selectProjects=express"
   },
   "dependencies": {
     "@monorepo/example": "~1.0.0",
@@ -14,7 +14,8 @@
     "jwks-rsa": "^3.0.1"
   },
   "devDependencies": {
-    "@types/node": "~18.16.0",
+    "@types/supertest": "^2.0.12",
+    "supertest": "^6.3.3",
     "ts-node": "~10.9.0",
     "typescript": "~4.7.4"
   }
