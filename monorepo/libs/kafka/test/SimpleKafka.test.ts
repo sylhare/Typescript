@@ -1,6 +1,6 @@
 import { ExampleFactory, ExampleService } from './Example';
-import { TProducer } from '../../src/kafka/TProducer';
-import { TConsumer } from '../../src/kafka/TConsumer';
+import { TProducer } from '../src/TProducer';
+import { TConsumer } from '../src/TConsumer';
 import { MockConsumer, MockKafka, MockProducer } from './MockKafka';
 
 describe('kafka', function () {
@@ -30,14 +30,14 @@ describe('kafka', function () {
 
     it('connects', async () => {
       await service.start();
-      expect(service.isConnected).toBeTrue();
+      expect(service.isConnected).toBeTruthy();
     });
 
     it('disconnects', async () => {
       await service.start();
-      expect(service.isConnected).toBeTrue();
+      expect(service.isConnected).toBeTruthy();
       await service.stop();
-      expect(service.isConnected).toBeFalse();
+      expect(service.isConnected).toBeFalsy();
     });
 
     it('does stuff', async () => {

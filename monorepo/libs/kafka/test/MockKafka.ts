@@ -1,5 +1,5 @@
 import { EachMessagePayload, KafkaMessage } from 'kafkajs';
-import { SimpleConsumer, SimpleProducer } from '../../src/kafka/TKafkaFactory';
+import { SimpleConsumer, SimpleProducer } from '../src/TKafkaFactory';
 
 export class MockKafka {
   readonly messages: EachMessagePayload[] = [];

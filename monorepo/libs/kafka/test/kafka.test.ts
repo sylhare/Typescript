@@ -1,6 +1,6 @@
 import { KafkaContainer, StartedKafkaContainer } from 'testcontainers';
-import { TProducer } from '../../src/kafka/TProducer';
-import { TConsumer } from '../../src/kafka/TConsumer';
+import { TProducer } from '../src/TProducer';
+import { TConsumer } from '../src/TConsumer';
 
 // First time downloading the image takes more than 5sec
 // use DEBUG=testcontainers for more logs

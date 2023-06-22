@@ -1,7 +1,7 @@
-import { SimpleConsumer, SimpleProducer, TKafkaFactory } from '../../src/kafka/TKafkaFactory';
-import { TKafkaConfig } from '../../src/kafka/TKafkaConfig';
-import { TConsumer, TConsumerConfiguration } from '../../src/kafka/TConsumer';
-import { TProducer, TProducerConfiguration } from '../../src/kafka/TProducer';
+import { SimpleConsumer, SimpleProducer, TKafkaFactory } from '../src/TKafkaFactory';
+import { TKafkaConfig } from '../src/TKafkaConfig';
+import { TConsumer, TConsumerConfiguration } from '../src/TConsumer';
+import { TProducer, TProducerConfiguration } from '../src/TProducer';
 import { Message } from 'kafkajs';
 
 export class ExampleFactory implements TKafkaFactory {
