@@ -15,6 +15,12 @@ const projects = [
     }),
     testMatch: ['<rootDir>/apps/express/**/*.test.ts'],
   },
+  {
+    preset: 'ts-jest',
+    testEnvironment: 'node',
+    displayName: 'kafka',
+    testMatch: ['<rootDir>/libs/kafka/**/*.test.ts'],
+  },
 ];
 
 const config: Config = {

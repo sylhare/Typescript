@@ -10,6 +10,7 @@
     "lint": "eslint --ext js,ts,tsx .",
     "test": "jest",
     "test:express": "jest --selectProjects=express",
+    "test:kafka": "jest --selectProjects=kafka",
     "build": "tsc"
   },
   "devDependencies": {

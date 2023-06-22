@@ -1,0 +1,15 @@
+{
+  "name": "@monorepo/kafka",
+  "description": "Kafka consumer and producer",
+  "private": true,
+  "version": "1.0.0",
+  "scripts": {
+    "test": "jest --config=../../jest.config.ts --selectProjects=kafka"
+  },
+  "dependencies": {
+    "kafkajs": "^2.2.3"
+  },
+  "devDependencies": {
+    "testcontainers": "^9.0.1"
+  }
+}
