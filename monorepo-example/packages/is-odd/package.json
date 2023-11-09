@@ -1,0 +1,15 @@
+{
+  "name": "@sylhare/is-odd",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "compile": "rm -rf dist/* && tsc -p tsconfig.pkg.json"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@sylhare/is-even": "^1.0.0"
+  }
+}
