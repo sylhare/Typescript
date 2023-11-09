@@ -1,33 +1,33 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Sea creatures Reducing creatures groups by type 1`] = `
-Object {
-  "crustacean": Array [
-    Object {
+{
+  "crustacean": [
+    {
       "deadly": true,
       "emoji": "🦐",
       "type": "crustacean",
     },
-    Object {
+    {
       "deadly": false,
       "emoji": "🦀",
       "type": "crustacean",
     },
   ],
-  "fish": Array [
-    Object {
+  "fish": [
+    {
       "deadly": false,
       "emoji": "🐡",
       "type": "fish",
     },
-    Object {
+    {
       "deadly": false,
       "emoji": "🐠",
       "type": "fish",
     },
   ],
-  "shark": Array [
-    Object {
+  "shark": [
+    {
       "deadly": false,
       "emoji": "🦈",
       "type": "shark",
@@ -38,32 +38,32 @@ Object {
 
 exports[`Sea creatures Reducing creatures groups creatures in a map per type 1`] = `
 Map {
-  "crustacean" => Array [
-    Object {
+  "crustacean" => [
+    {
       "deadly": true,
       "emoji": "🦐",
       "type": "crustacean",
     },
-    Object {
+    {
       "deadly": false,
       "emoji": "🦀",
       "type": "crustacean",
     },
   ],
-  "fish" => Array [
-    Object {
+  "fish" => [
+    {
       "deadly": false,
       "emoji": "🐡",
       "type": "fish",
     },
-    Object {
+    {
       "deadly": false,
       "emoji": "🐠",
       "type": "fish",
     },
   ],
-  "shark" => Array [
-    Object {
+  "shark" => [
+    {
       "deadly": false,
       "emoji": "🦈",
       "type": "shark",

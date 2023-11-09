@@ -26,12 +26,13 @@
     "forceConsistentCasingInFileNames": true,        /* Disallow inconsistently-cased references to the same file. */
     "types": ["node", "jest", "jest-extended"]
   },
+  "files": ["node_modules/jest-extended/types/index.d.ts"],
   "exclude": [
     "/node_modules/",
     "tests/**/*",
-    "monorepo/**",
+    "monorepo/**"
   ],
   "include": [
-    "src/**/*",
+    "src/**/*"
   ]
 }

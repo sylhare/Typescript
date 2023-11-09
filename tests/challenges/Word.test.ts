@@ -1,3 +1,5 @@
+/// <reference types="jest-extended" />
+
 describe('Word', () => {
 
   describe('Word Cut', () => {
