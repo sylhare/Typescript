@@ -19,5 +19,5 @@
     }
   },
   "watchPathIgnorePatterns": [".idea"],
-  "modulePathIgnorePatterns": ["<rootDir>/monorepo/"]
+  "modulePathIgnorePatterns": ["<rootDir>/monorepo/", "<rootDir>/monorepo-example/"]
 }
