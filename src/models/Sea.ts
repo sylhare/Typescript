@@ -20,3 +20,17 @@ export const sea: SeaCreature[] = [
   { emoji: '🦈', deadly: false, type: 'shark' },
   { emoji: '🦀', deadly: false, type: 'crustacean' },
 ];
+
+export interface SeaMonster {
+  deadly: boolean;
+}
+
+export class Leviathan implements SeaMonster {
+  deadly = true;
+}
+
+class Kraken implements SeaMonster {
+  deadly = true;
+}
+
+export const seaMonsters: SeaMonster[] = [new Leviathan(), new Kraken()];

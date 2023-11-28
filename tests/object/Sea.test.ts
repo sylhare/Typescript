@@ -1,9 +1,9 @@
 import {
-  deadliestCreature,
+  deadliestCreature, Leviathan,
   sea,
   SeaCreature,
   SeaCreatureType,
-  SeaCreatureTyped,
+  SeaCreatureTyped, SeaMonster, seaMonsters,
   SortedCreatures
 } from '../../src/models/Sea';
 
@@ -43,7 +43,7 @@ describe('Sea creatures', () => {
       expect(deadlyCreature).toBe(sea[sea.length - 1]);
     });
 
-    it('reduces not deadly out', () => {
+    it('reduces to only deadly', () => {
       const deadlyCreatures = sea.reduce((sortedCreatures: SeaCreature[], currentCreature) => ([
         ...sortedCreatures,
         ...(currentCreature.deadly ? [currentCreature] : [])
@@ -77,8 +77,7 @@ describe('Sea creatures', () => {
     });
 
     it('puts creatures in a safe or deadly object extracted', () => {
-      type DeadlySafe = { deadly: SeaCreature[], safe: SeaCreature[] };
-      const creatureReducer = (result: DeadlySafe, creature: SeaCreature) => creature.deadly ?
+      const creatureReducer = (result: SortedCreatures, creature: SeaCreature) => creature.deadly ?
         { ...result, deadly: [...result.deadly, creature] } :
         { ...result, safe: [...result.safe, creature] };
 
@@ -196,6 +195,24 @@ describe('Sea creatures', () => {
       expect(groupedCreatures).toMatchSnapshot();
       expect(groupedCreatures.shark.length).toEqual(1);
       expect(groupedCreatures).toBeInstanceOf(Object);
+    });
+  });
+
+  describe('With classes', () => {
+    it('reduce to deadly', () => {
+      const deadlyCreatures: SeaMonster[] = seaMonsters.reduce((sortedCreatures, currentCreature) => ([
+        ...sortedCreatures,
+        ...(currentCreature.deadly ? [currentCreature] : [])
+      ]), [] as SeaMonster[] );
+      expect(deadlyCreatures.length).toBe(2);
+    });
+
+    it('reduce to leviathan', () => {
+      const leviathans = seaMonsters.reduce((sortedCreatures, currentCreature) => ([
+        ...sortedCreatures,
+        ...(currentCreature instanceof Leviathan ? [currentCreature] : [])
+      ]), [] as Leviathan[] );
+      expect(leviathans.length).toBe(1);
     });
   });
 });
