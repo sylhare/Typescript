@@ -1,4 +1,11 @@
-import { deadliestCreature, sea, SeaCreature } from '../../src/models/Sea';
+import {
+  deadliestCreature,
+  sea,
+  SeaCreature,
+  SeaCreatureType,
+  SeaCreatureTyped,
+  SortedCreatures
+} from '../../src/models/Sea';
 
 describe('Sea creatures', () => {
 
@@ -50,10 +57,10 @@ describe('Sea creatures', () => {
     });
 
     it('puts creatures in a safe or deadly object', () => {
-      const reducedCreatures = sea.reduce((result, creature) => {
+      const reducedCreatures: SortedCreatures = sea.reduce((result: SortedCreatures, creature) => {
         creature.deadly ? result.deadly.push(creature) : result.safe.push(creature);
         return result;
-      }, { deadly: [] as SeaCreature[], safe: [] as SeaCreature[] });
+      }, { deadly: [], safe: [] });
 
       expect(reducedCreatures).toMatchObject({ deadly: [deadliestCreature] });
       expect(reducedCreatures.safe.length).toEqual(sea.length - 1);
@@ -82,10 +89,11 @@ describe('Sea creatures', () => {
     });
 
     it('groups by type', () => {
-      const groupedCreatures = sea.reduce((result: any, creature) => ({
+      const empty: { [key: string]: SeaCreature[] } = {};
+      const groupedCreatures: { [key: string]: SeaCreature[] } = sea.reduce((result, creature) => ({
         ...result,
         [creature.type]: [...(result[creature.type] || []), creature]
-      }), {});
+      }), empty);
 
       expect(groupedCreatures).toMatchSnapshot();
       expect(groupedCreatures.shark.length).toEqual(1);
