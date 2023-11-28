@@ -109,4 +109,93 @@ describe('Sea creatures', () => {
       expect(groupedCreatures).toBeInstanceOf(Map);
     });
   });
+
+  describe('With more TS types', () => {
+    it('groups an object', () => {
+      type GroupedNamedCreatures = {
+        crustacean?: NamedSeaCreature[],
+        fish?: NamedSeaCreature[],
+        shark?: NamedSeaCreature[],
+      };
+      type NamedSeaCreature = SeaCreatureTyped & { name: string };
+      type SeaObject = {
+        [key: string]: SeaCreatureTyped
+      };
+      const emptyGroup: GroupedNamedCreatures = { crustacean: [], fish: [], shark: [] };
+
+      const seaObject = {
+        shrimp: { deadly: true, emoji: '🦐', type: 'crustacean' },
+        blowfish: { deadly: false, emoji: '🐡', type: 'fish' },
+        // ...other objects
+      } as SeaObject;
+
+      const grouped: GroupedNamedCreatures = Object.entries(seaObject).reduce((result, [key, value]) => ({
+        ...result,
+        [value.type]: [...(result[value.type] || []), ({ ...value, name: key })]
+      }), emptyGroup);
+      expect(grouped).toMatchSnapshot();
+
+      // Without explicit 'any' or 'GroupedNamedCreatures' for the result or the initial value
+      // TS7053: Element implicitly has an any type because expression of type SeaCreatureType can't be used to index type '{}'
+      // Property [SeaCreatureType.CRUSTACEAN] does not exist on type '{}'
+      const namedGrouped = Object.entries(seaObject).reduce((result, [key, value]) => ({
+        ...result,
+        [value.type]: [...(result[value.type] || []), ({ ...value, name: key })]
+      }), {} as GroupedNamedCreatures);
+      expect(JSON.stringify(grouped)).toEqual(JSON.stringify(namedGrouped));
+    });
+
+    it('groups from a known group', () => {
+      type GroupedCreatures = {
+        crustacean?: SeaCreature[],
+        fish?: SeaCreature[],
+        shark?: SeaCreature[],
+      };
+      type SeaCreatureTyped = {
+        type: keyof GroupedCreatures,
+        emoji: string,
+        deadly: boolean,
+      };
+
+      const groupedCreatures = (sea as SeaCreatureTyped[]).reduce((result: GroupedCreatures, creature: SeaCreatureTyped) => ({
+        ...result,
+        [creature.type]: [...(result[creature.type] || []), creature]
+      }), {});
+
+      expect(groupedCreatures).toMatchSnapshot();
+      expect(groupedCreatures.shark!.length).toEqual(1);
+      expect(groupedCreatures).toBeInstanceOf(Object);
+    });
+
+    it('groups by known type', () => {
+      type GroupedCreatures = {
+        crustacean: SeaCreature[],
+        fish: SeaCreature[],
+        shark: SeaCreature[],
+      };
+      const seaTyped: SeaCreatureTyped[] = [
+        { emoji: '🦐', deadly: true, type: SeaCreatureType.CRUSTACEAN },
+        { emoji: '🐡', deadly: false, type: SeaCreatureType.FISH },
+        { emoji: '🐠', deadly: false, type: SeaCreatureType.FISH },
+        { emoji: '🦈', deadly: false, type: SeaCreatureType.SHARK },
+        { emoji: '🦀', deadly: false, type: SeaCreatureType.CRUSTACEAN },
+      ];
+      const emptyGroup: GroupedCreatures = { crustacean: [], fish: [], shark: [] };
+
+      // Without casting or using `seaTyped`, the `sea` object would trigger:
+      // TS2769: No overload matches this call.
+      // Types of parameters creature and currentValue are incompatible.
+      // Type 'SeaCreature' is not assignable to type 'SeaCreatureTyped'
+      // Types of property 'type' are incompatible.
+      // Type 'string' is not assignable to type 'SeaCreatureType'
+      const groupedCreatures: GroupedCreatures = seaTyped.reduce((result: GroupedCreatures, creature: SeaCreatureTyped) => ({
+        ...result,
+        [creature.type]: [...(result[creature.type] || []), creature]
+      }), emptyGroup);
+
+      expect(groupedCreatures).toMatchSnapshot();
+      expect(groupedCreatures.shark.length).toEqual(1);
+      expect(groupedCreatures).toBeInstanceOf(Object);
+    });
+  });
 });

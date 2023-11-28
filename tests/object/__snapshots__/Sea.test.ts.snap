@@ -71,3 +71,96 @@ Map {
   ],
 }
 `;
+
+exports[`Sea creatures With dodgy types groups an object 1`] = `
+{
+  "crustacean": [
+    {
+      "deadly": true,
+      "emoji": "🦐",
+      "name": "shrimp",
+      "type": "crustacean",
+    },
+  ],
+  "fish": [
+    {
+      "deadly": false,
+      "emoji": "🐡",
+      "name": "blowfish",
+      "type": "fish",
+    },
+  ],
+}
+`;
+
+exports[`Sea creatures With dodgy types groups by known type 1`] = `
+{
+  "crustacean": [
+    {
+      "deadly": true,
+      "emoji": "🦐",
+      "type": "crustacean",
+    },
+    {
+      "deadly": false,
+      "emoji": "🦀",
+      "type": "crustacean",
+    },
+  ],
+  "fish": [
+    {
+      "deadly": false,
+      "emoji": "🐡",
+      "type": "fish",
+    },
+    {
+      "deadly": false,
+      "emoji": "🐠",
+      "type": "fish",
+    },
+  ],
+  "shark": [
+    {
+      "deadly": false,
+      "emoji": "🦈",
+      "type": "shark",
+    },
+  ],
+}
+`;
+
+exports[`Sea creatures With dodgy types groups from a known group 1`] = `
+{
+  "crustacean": [
+    {
+      "deadly": true,
+      "emoji": "🦐",
+      "type": "crustacean",
+    },
+    {
+      "deadly": false,
+      "emoji": "🦀",
+      "type": "crustacean",
+    },
+  ],
+  "fish": [
+    {
+      "deadly": false,
+      "emoji": "🐡",
+      "type": "fish",
+    },
+    {
+      "deadly": false,
+      "emoji": "🐠",
+      "type": "fish",
+    },
+  ],
+  "shark": [
+    {
+      "deadly": false,
+      "emoji": "🦈",
+      "type": "shark",
+    },
+  ],
+}
+`;
