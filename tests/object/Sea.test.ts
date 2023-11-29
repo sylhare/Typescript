@@ -137,11 +137,12 @@ describe('Sea creatures', () => {
       // Without explicit 'any' or 'GroupedNamedCreatures' for the result or the initial value
       // TS7053: Element implicitly has an any type because expression of type SeaCreatureType can't be used to index type '{}'
       // Property [SeaCreatureType.CRUSTACEAN] does not exist on type '{}'
-      const namedGrouped = Object.entries(seaObject).reduce((result, [key, value]) => ({
+      const castedInitialGroup = Object.entries(seaObject).reduce((result, [key, value]) => ({
         ...result,
         [value.type]: [...(result[value.type] || []), ({ ...value, name: key })]
       }), {} as GroupedNamedCreatures);
-      expect(JSON.stringify(grouped)).toEqual(JSON.stringify(namedGrouped));
+      // No shark in the `castedInitialGroup` compared to `grouped`
+      expect(JSON.stringify(grouped)).not.toEqual(JSON.stringify(castedInitialGroup));
     });
 
     it('groups from a known group', () => {

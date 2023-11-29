@@ -72,7 +72,7 @@ Map {
 }
 `;
 
-exports[`Sea creatures With dodgy types groups an object 1`] = `
+exports[`Sea creatures With more TS types groups an object 1`] = `
 {
   "crustacean": [
     {
@@ -90,10 +90,11 @@ exports[`Sea creatures With dodgy types groups an object 1`] = `
       "type": "fish",
     },
   ],
+  "shark": [],
 }
 `;
 
-exports[`Sea creatures With dodgy types groups by known type 1`] = `
+exports[`Sea creatures With more TS types groups by known type 1`] = `
 {
   "crustacean": [
     {
@@ -129,7 +130,7 @@ exports[`Sea creatures With dodgy types groups by known type 1`] = `
 }
 `;
 
-exports[`Sea creatures With dodgy types groups from a known group 1`] = `
+exports[`Sea creatures With more TS types groups from a known group 1`] = `
 {
   "crustacean": [
     {
