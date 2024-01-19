@@ -10,7 +10,7 @@ export const jwtValidator = (): UnlessRequestHandler => expressjwt({
     cache: true,
     jwksUri: 'https://my-authz-server/.well-known/jwks.json'
   }) as GetVerificationKey,
-  requestProperty: 'user',
+  requestProperty: 'user', // To force it on 'req.user', default changed to 'req.auth'
   getToken,
   algorithms: ['RS256']
 });
