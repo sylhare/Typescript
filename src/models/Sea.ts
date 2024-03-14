@@ -1,11 +1,11 @@
 export type SeaCreature = { emoji: string, deadly: boolean, type: string };
 export type SortedCreatures = { deadly: SeaCreature[], safe: SeaCreature[] };
-export type SeaCreatureTyped = {
-  type: SeaCreatureType,
+export type MarineCreature = {
+  type: MarineType,
   emoji: string,
   deadly: boolean,
 };
-export enum SeaCreatureType {
+export enum MarineType {
   CRUSTACEAN = 'crustacean',
   FISH = 'fish',
   SHARK = 'shark',

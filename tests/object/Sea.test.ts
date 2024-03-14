@@ -1,10 +1,13 @@
 import {
-  deadliestCreature, Leviathan,
+  deadliestCreature,
+  Leviathan,
   sea,
   SeaCreature,
-  SeaCreatureType,
-  SeaCreatureTyped, SeaMonster, seaMonsters,
-  SortedCreatures
+  MarineType,
+  MarineCreature,
+  SeaMonster,
+  seaMonsters,
+  SortedCreatures,
 } from '../../src/models/Sea';
 
 describe('Sea creatures', () => {
@@ -21,7 +24,7 @@ describe('Sea creatures', () => {
     it('maps the creatures to their deadliest instincts', () => {
       const creatures = sea.map(creature => ({
         ...creature,
-        type: `${creature.deadly ? 'Deadly' : 'Chill'} creature`
+        type: `${creature.deadly ? 'Deadly' : 'Chill'} creature`,
       }));
       creatures.forEach(creature => expect(creature.type).toBeDefined());
     });
@@ -43,10 +46,16 @@ describe('Sea creatures', () => {
       expect(deadlyCreature).toBe(sea[sea.length - 1]);
     });
 
+    it('reduces to creatures via inferred type', () => {
+      type Creature = { name: string };
+      const creatures: Creature[] = sea.reduce<Creature[]>((result, current) => [...result, { name: current.emoji }], []);
+      expect(creatures.length).toBe(sea.length);
+    });
+
     it('reduces to only deadly', () => {
       const deadlyCreatures = sea.reduce((sortedCreatures: SeaCreature[], currentCreature) => ([
         ...sortedCreatures,
-        ...(currentCreature.deadly ? [currentCreature] : [])
+        ...(currentCreature.deadly ? [currentCreature] : []),
       ]), []);
       expect(deadlyCreatures.length).toBe(1);
       expect(deadlyCreatures[0]).toBe(deadliestCreature);
@@ -67,10 +76,11 @@ describe('Sea creatures', () => {
     });
 
     it('puts creatures in a safe or deadly object in a different way', () => {
-      const reducedCreatures = sea.reduce((result, creature) => creature.deadly ?
-        { ...result, deadly: [...result.deadly, creature] } :
-        { ...result, safe: [...result.safe, creature] },
-      { deadly: [] as SeaCreature[], safe: [] as SeaCreature[] });
+      const reducedCreatures = sea
+        .reduce((result, creature) => creature.deadly ?
+          { ...result, deadly: [...result.deadly, creature] }
+          : { ...result, safe: [...result.safe, creature] },
+        { deadly: [] as SeaCreature[], safe: [] as SeaCreature[] });
 
       expect(reducedCreatures).toMatchObject({ deadly: [deadliestCreature] });
       expect(reducedCreatures.safe.length).toEqual(sea.length - 1);
@@ -91,7 +101,7 @@ describe('Sea creatures', () => {
       const empty: { [key: string]: SeaCreature[] } = {};
       const groupedCreatures: { [key: string]: SeaCreature[] } = sea.reduce((result, creature) => ({
         ...result,
-        [creature.type]: [...(result[creature.type] || []), creature]
+        [creature.type]: [...(result[creature.type] || []), creature],
       }), empty);
 
       expect(groupedCreatures).toMatchSnapshot();
@@ -102,25 +112,25 @@ describe('Sea creatures', () => {
     it('groups creatures in a map per type', () => {
       const groupedCreatures = sea.reduce((typedCreatures, creature) =>
         typedCreatures.set(creature.type, [...typedCreatures.get(creature.type) || [], creature]),
-      new Map());
+      new Map<string, SeaCreature[]>());
       expect(groupedCreatures).toMatchSnapshot();
-      expect(groupedCreatures.get('shark').length).toEqual(1);
+      expect(groupedCreatures.get('shark')?.length).toEqual(1);
       expect(groupedCreatures).toBeInstanceOf(Map);
     });
   });
 
   describe('With more TS types', () => {
     it('groups an object', () => {
-      type GroupedNamedCreatures = {
-        crustacean?: NamedSeaCreature[],
-        fish?: NamedSeaCreature[],
-        shark?: NamedSeaCreature[],
+      type MarineEcosystem = {
+        crustacean?: MarineLife[],
+        fish?: MarineLife[],
+        shark?: MarineLife[],
       };
-      type NamedSeaCreature = SeaCreatureTyped & { name: string };
+      type MarineLife = MarineCreature & { name: string };
       type SeaObject = {
-        [key: string]: SeaCreatureTyped
+        [key: string]: MarineCreature
       };
-      const emptyGroup: GroupedNamedCreatures = { crustacean: [], fish: [], shark: [] };
+      const emptyGroup: MarineEcosystem = { crustacean: [], fish: [], shark: [] };
 
       const seaObject = {
         shrimp: { deadly: true, emoji: '🦐', type: 'crustacean' },
@@ -128,9 +138,9 @@ describe('Sea creatures', () => {
         // ...other objects
       } as SeaObject;
 
-      const grouped: GroupedNamedCreatures = Object.entries(seaObject).reduce((result, [key, value]) => ({
+      const grouped: MarineEcosystem = Object.entries(seaObject).reduce((result, [key, value]) => ({
         ...result,
-        [value.type]: [...(result[value.type] || []), ({ ...value, name: key })]
+        [value.type]: [...(result[value.type] || []), ({ ...value, name: key })],
       }), emptyGroup);
       expect(grouped).toMatchSnapshot();
 
@@ -139,8 +149,8 @@ describe('Sea creatures', () => {
       // Property [SeaCreatureType.CRUSTACEAN] does not exist on type '{}'
       const castedInitialGroup = Object.entries(seaObject).reduce((result, [key, value]) => ({
         ...result,
-        [value.type]: [...(result[value.type] || []), ({ ...value, name: key })]
-      }), {} as GroupedNamedCreatures);
+        [value.type]: [...(result[value.type] || []), ({ ...value, name: key })],
+      }), {} as MarineEcosystem);
       // No shark in the `castedInitialGroup` compared to `grouped`
       expect(JSON.stringify(grouped)).not.toEqual(JSON.stringify(castedInitialGroup));
     });
@@ -159,7 +169,7 @@ describe('Sea creatures', () => {
 
       const groupedCreatures = (sea as SeaCreatureTyped[]).reduce((result: GroupedCreatures, creature: SeaCreatureTyped) => ({
         ...result,
-        [creature.type]: [...(result[creature.type] || []), creature]
+        [creature.type]: [...(result[creature.type] || []), creature],
       }), {});
 
       expect(groupedCreatures).toMatchSnapshot();
@@ -173,12 +183,12 @@ describe('Sea creatures', () => {
         fish: SeaCreature[],
         shark: SeaCreature[],
       };
-      const seaTyped: SeaCreatureTyped[] = [
-        { emoji: '🦐', deadly: true, type: SeaCreatureType.CRUSTACEAN },
-        { emoji: '🐡', deadly: false, type: SeaCreatureType.FISH },
-        { emoji: '🐠', deadly: false, type: SeaCreatureType.FISH },
-        { emoji: '🦈', deadly: false, type: SeaCreatureType.SHARK },
-        { emoji: '🦀', deadly: false, type: SeaCreatureType.CRUSTACEAN },
+      const seaTyped: MarineCreature[] = [
+        { emoji: '🦐', deadly: true, type: MarineType.CRUSTACEAN },
+        { emoji: '🐡', deadly: false, type: MarineType.FISH },
+        { emoji: '🐠', deadly: false, type: MarineType.FISH },
+        { emoji: '🦈', deadly: false, type: MarineType.SHARK },
+        { emoji: '🦀', deadly: false, type: MarineType.CRUSTACEAN },
       ];
       const emptyGroup: GroupedCreatures = { crustacean: [], fish: [], shark: [] };
 
@@ -188,9 +198,9 @@ describe('Sea creatures', () => {
       // Type 'SeaCreature' is not assignable to type 'SeaCreatureTyped'
       // Types of property 'type' are incompatible.
       // Type 'string' is not assignable to type 'SeaCreatureType'
-      const groupedCreatures: GroupedCreatures = seaTyped.reduce((result: GroupedCreatures, creature: SeaCreatureTyped) => ({
+      const groupedCreatures: GroupedCreatures = seaTyped.reduce((result: GroupedCreatures, creature: MarineCreature) => ({
         ...result,
-        [creature.type]: [...(result[creature.type] || []), creature]
+        [creature.type]: [...(result[creature.type] || []), creature],
       }), emptyGroup);
 
       expect(groupedCreatures).toMatchSnapshot();
@@ -201,18 +211,18 @@ describe('Sea creatures', () => {
 
   describe('With classes', () => {
     it('reduce to deadly', () => {
-      const deadlyCreatures: SeaMonster[] = seaMonsters.reduce((sortedCreatures, currentCreature) => ([
+      const deadlyCreatures: SeaMonster[] = seaMonsters.reduce<SeaMonster[]>((sortedCreatures, currentCreature) => ([
         ...sortedCreatures,
-        ...(currentCreature.deadly ? [currentCreature] : [])
-      ]), [] as SeaMonster[] );
+        ...(currentCreature.deadly ? [currentCreature] : []),
+      ]), []);
       expect(deadlyCreatures.length).toBe(2);
     });
 
     it('reduce to leviathan', () => {
       const leviathans = seaMonsters.reduce((sortedCreatures, currentCreature) => ([
         ...sortedCreatures,
-        ...(currentCreature instanceof Leviathan ? [currentCreature] : [])
-      ]), [] as Leviathan[] );
+        ...(currentCreature instanceof Leviathan ? [currentCreature] : []),
+      ]), [] as Leviathan[]);
       expect(leviathans.length).toBe(1);
     });
   });
