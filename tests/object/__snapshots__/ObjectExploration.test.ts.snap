@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Farm can be viewed as entries 1`] = `
+exports[`Object exploration Farm can be viewed as entries 1`] = `
 [
   [
     "pig",
@@ -33,7 +33,7 @@ exports[`Farm can be viewed as entries 1`] = `
 ]
 `;
 
-exports[`Farm groups by type 1`] = `
+exports[`Object exploration Farm groups by type 1`] = `
 {
   "animal": [
     {

@@ -10,7 +10,6 @@ describe('reduce', () => {
   });
 
   it('can infer a type', () => {
-    type ReturnedType = Record<string, string>;
     const result = [{ a: 'a' }, { b: 'b' }, { c: 'c' }].reduce((accumulator, current) => {
       return { ...accumulator, ...current };
     }, {});
