@@ -8,7 +8,7 @@ const projects = [
     testEnvironment: 'node',
     displayName: 'express',
     moduleNameMapper: pathsToModuleNameMapper({
-      '@monorepo/*': ['libs/*/src']
+      '@project/*': ['libs/*/src']
     }, {
       // This has to match the baseUrl defined in tsconfig.json.
       prefix: '<rootDir>/',

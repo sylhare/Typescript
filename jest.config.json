@@ -9,7 +9,7 @@
     "jest-extended/all"
   ],
   "collectCoverage": true,
-  "collectCoverageFrom": ["src/**/*.ts", "!src/index.ts", "!src/kafka/*.ts"],
+  "collectCoverageFrom": ["src/**/*.ts", "!src/index.ts"],
   "coveragePathIgnorePatterns": [],
   "coverageReporters": ["text", "text-summary", "lcov"],
   "coverageThreshold": {
@@ -19,5 +19,5 @@
     }
   },
   "watchPathIgnorePatterns": [".idea"],
-  "modulePathIgnorePatterns": ["<rootDir>/monorepo/", "<rootDir>/monorepo-example/"]
+  "modulePathIgnorePatterns": ["<rootDir>/project/", "<rootDir>/monorepo-example/"]
 }

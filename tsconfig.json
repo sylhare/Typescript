@@ -30,7 +30,7 @@
   "exclude": [
     "/node_modules/",
     "tests/**/*",
-    "monorepo/**"
+    "project/**"
   ],
   "include": [
     "src/**/*"

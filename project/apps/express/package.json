@@ -1,5 +1,5 @@
 {
-  "name": "@monorepo/express",
+  "name": "@project/express",
   "description": "Express examples",
   "private": true,
   "version": "1.0.0",
@@ -7,7 +7,7 @@
     "test": "jest --config=../../jest.config.ts --selectProjects=express"
   },
   "dependencies": {
-    "@monorepo/example": "~1.0.0",
+    "@project/example": "~1.0.0",
     "express": "^4.18.2",
     "express-jwt": "^8.4.1",
     "express-unless": "^2.1.3",

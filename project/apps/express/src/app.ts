@@ -1,5 +1,5 @@
 import express, { Request, Response } from 'express';
-import { up } from '@monorepo/example';
+import { up } from '@project/example';
 
 export const app = express();
 

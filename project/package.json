@@ -1,6 +1,6 @@
 {
-  "name": "ts-monorepo",
-  "description": "TypeScript monorepo",
+  "name": "project",
+  "description": "TypeScript projects",
   "private": true,
   "workspaces": [
     "apps/*",
