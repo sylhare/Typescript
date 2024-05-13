@@ -25,4 +25,22 @@ describe('generics', () => {
       expect(testLap(lightning)).toEqual(20);
     });
   });
+
+  describe('Keywords', () => {
+    it('gets the type of a value', () => {
+      const product = new Product();
+      expect(product instanceof Product).toBeTruthy();
+      const productData = { id: 0, name: 'product' };
+      expect(productData instanceof Product).toBeFalsy();
+      expect(typeof productData).toEqual('object');
+      expect(typeof product).toEqual(typeof productData);
+    });
+
+    it('sets the type', () => {
+      const human = new Human();
+      const walkingPotato = new WalkingPotato();
+      expect(act(human)).toEqual('Hello');
+      expect(act(walkingPotato)).toEqual('zzz');
+    });
+  });
 });
