@@ -17,3 +17,8 @@ export const people = [
     tools: ['🍳']
   }
 ];
+
+export interface Person {
+  name: string;
+  age: number;
+}
