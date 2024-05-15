@@ -88,4 +88,21 @@ describe('generics', () => {
       expect(typeof prefixedWithJohn).toEqual(typeof prefixedJohn);
     });
   });
+
+  describe('Play with objects', () => {
+    it('gets values', () => {
+      const values = valuesOf(fruitBasket);
+      expect(values).toEqual(['🍎', '🍌', '🥝']);
+    });
+
+    it('gets values from keys', () => {
+      const values = valuesFromKeys(fruitBasket, ['apple', 'kiwi']);
+      expect(values).toEqual(['🍎', '🥝']);
+    });
+
+    it('gets values from object', () => {
+      const values = valuesFrom(fruitBasket);
+      expect(values).toEqual(['🍎', '🍌', '🥝']);
+    });
+  });
 });
