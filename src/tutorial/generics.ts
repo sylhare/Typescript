@@ -10,6 +10,10 @@ export interface Sprinter {
   sprint: (distance: number) => number;
 }
 
+export function walkLap<R, T extends Walking<R>>(walker: T, distance: R): R {
+  return walker.walk(distance);
+}
+
 export function testLap<T extends Sprinter>(genericSprinter: T): number {
   return genericSprinter.sprint(10);
 }
@@ -25,6 +29,7 @@ export class Biped<T> implements Walking<T>, Sprinter {
 }
 
 export class Human extends Biped<string> {
+  private name: string = 'Human';
   talk(): string {
     return 'Hello';
   }

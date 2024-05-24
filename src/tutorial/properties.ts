@@ -1,5 +1,3 @@
-import { Person } from '../models/Examples';
-
 export type WithProperty<K extends string, V> = {
   [key in K]: V;
 };
