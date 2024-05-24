@@ -29,7 +29,7 @@ export class Biped<T> implements Walking<T>, Sprinter {
 }
 
 export class Human extends Biped<string> {
-  private name: string = 'Human';
+  name: string = 'Human';
   talk(): string {
     return 'Hello';
   }

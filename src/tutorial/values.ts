@@ -1,5 +1,5 @@
-export function valuesOf<O extends object>(obj: O): (O[keyof O])[] {
-  const values: (O[keyof O])[] = [];
+export function valuesOf<T extends object>(obj: T): (T[keyof T])[] {
+  const values: (T[keyof T])[] = [];
   let key: keyof typeof obj;
   for (key in obj) {
     values.push(obj[key]);
@@ -7,9 +7,9 @@ export function valuesOf<O extends object>(obj: O): (O[keyof O])[] {
   return values;
 }
 
-export function valuesFromKeys<O extends object>(obj: O, keys: string[]): O[keyof O][] {
-  const values: O[keyof O][] = [];
-  const objectKeys = keys.filter(key => key in obj) as unknown as (keyof O)[];
+export function valuesFromKeys<T extends object>(obj: T, keys: string[]): T[keyof T][] {
+  const values: T[keyof T][] = [];
+  const objectKeys = keys.filter(key => key in obj) as unknown as (keyof T)[];
 
   for (const key of objectKeys) {
     values.push(obj[key]);
@@ -18,10 +18,9 @@ export function valuesFromKeys<O extends object>(obj: O, keys: string[]): O[keyo
   return values;
 }
 
-export function valuesFrom<O extends object>(obj: O): O[keyof O][] {
-  const values: O[keyof O][] = [];
-  for (const [key, value] of Object.entries(obj)) {
-    console.log(key, value);
+export function valuesFrom<T extends object>(obj: T): T[keyof T][] {
+  const values: T[keyof T][] = [];
+  for (const [, value] of Object.entries(obj)) {
     values.push(value);
   }
   return values;

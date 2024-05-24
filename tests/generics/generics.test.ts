@@ -69,10 +69,12 @@ describe('generics', () => {
 
     it('gets properties', () => {
       expect(getProperty(john, 'name')).toEqual('John');
+      expect(getProperty(new Human(), 'name')).toEqual('Human');
     });
 
     it('has properties', () => {
       expect(hasProperty(john, 'name')).toBeTruthy();
+      expect(john.hasOwnProperty('name')).toBeTruthy();
     });
 
     it('updates properties', () => {
@@ -80,6 +82,12 @@ describe('generics', () => {
       // const age: WithProperty<string, number> = { age: '31' }; // TS2322: Type string is not assignable to type number
       expect(withProperty(john, age)).toEqual({ name: 'John', age: 31 });
       expect(withProperty(john, { yolo: ['🦄'] })).toEqual({ name: 'John', age: 31, yolo: ['🦄'] });
+    });
+
+    it('updates class properties', () => {
+      const human = new Human();
+      const yolo: Human & { yolo: string } = withProperty(human, { yolo: '🦄' });
+      expect(yolo.yolo).toEqual('🦄');
     });
 
     it('can type', () => {
