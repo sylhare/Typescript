@@ -2,7 +2,7 @@ import { valuesFrom, valuesFromKeys, valuesOf } from '../../src/tutorial/values'
 import { fruitBasket } from '../../src/models/Farm';
 import { Person } from '../../src/models/Examples';
 import { getProperty, hasProperty, PrefixedWith, WithProperty, withProperty } from '../../src/tutorial/properties';
-import { act, Human, returnAnything, Sprinter, testLap, WalkingPotato } from '../../src/tutorial/generics';
+import { act, Human, returnAnything, Sprinter, testLap, WalkingPotato, walkLap } from '../../src/tutorial/generics';
 import { Product } from '../../src/models/Product';
 
 describe('generics', () => {
@@ -10,6 +10,7 @@ describe('generics', () => {
   describe('Syntax', () => {
     it('works for function with generics', () => {
       expect(returnAnything('🦄')).toEqual('🦄');
+      expect(returnAnything<string>('hello')).toEqual('hello');
     });
 
     it('works for classes with generics', () => {
@@ -24,6 +25,11 @@ describe('generics', () => {
       const lightning: Sprinter = { sprint: (distance: number) => distance * 2 };
       expect(testLap(lightning)).toEqual(20);
     });
+
+    it('works with two generics', () => {
+      const human = new Human();
+      expect(walkLap<string, Human>(human, '10m')).toEqual('10m');
+    });
   });
 
   describe('Keywords', () => {
@@ -34,6 +40,16 @@ describe('generics', () => {
       expect(productData instanceof Product).toBeFalsy();
       expect(typeof productData).toEqual('object');
       expect(typeof product).toEqual(typeof productData);
+    });
+
+    it('checks type of', () => {
+      const data = ['hello', 'world'];
+      expect(typeof data === 'object').toBeTruthy();
+    });
+
+    it('checks keyof', () => {
+      const keys = Object.keys(new Human()) as unknown as keyof Human;
+      expect(keys).toEqual(['name']);
     });
 
     it('sets the type', () => {
