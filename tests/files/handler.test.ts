@@ -32,6 +32,11 @@ describe('Files handler', function () {
 
   describe('Buffer', () => {
 
+    it('test base64 Buffer', () => {
+      const buffer = Buffer.from('[{"hello":"world"}]').toString('base64');
+      expect(Buffer.from(buffer, 'base64').toString('utf8')).toEqual('[{"hello":"world"}]');
+    });
+
     it('Transform into a Buffer', () => {
       const buffer = Buffer.from(JSON.stringify(job));
       expect(typeof buffer).toEqual('object');
