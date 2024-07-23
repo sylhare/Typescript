@@ -10,6 +10,27 @@ describe('It is jest an excuse', () => {
     expect('hello').toEqual('hello');
   });
 
+  describe('clearAllMocks vs resetAllMocks', () => {
+
+    it('resetAllMocks', () => {
+      const mock = jest.fn().mockReturnValue('Hello World!');
+      expect(mock()).toBe('Hello World!');
+      expect(mock).toHaveBeenCalledTimes(1);
+      jest.resetAllMocks();
+      expect(mock).not.toHaveBeenCalled();
+      expect(mock()).toBeUndefined();
+    });
+
+    it('clearAllMocks', () => {
+      const mock = jest.fn().mockReturnValue('Hello World!');
+      expect(mock()).toBe('Hello World!');
+      expect(mock).toHaveBeenCalledTimes(1);
+      jest.clearAllMocks();
+      expect(mock).not.toHaveBeenCalled();
+      expect(mock()).toBe('Hello World!');
+    });
+  });
+
   describe('toBe vs toEqual', () => {
     const hello = { hello: 'world' };
     it('should work', () => {
