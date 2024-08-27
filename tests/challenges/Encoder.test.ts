@@ -1,76 +1,14 @@
+import { encodeClass, encodeFor, encodeReduce } from '../../src/challenges/encoder';
+
+/**
+ * Take a string and encode it:
+ * - If a character is repeated, encode it as the number of times it is repeated followed by the character
+ */
 describe('Encoder', () => {
 
-  // Solution 1
-  class Encoder {
-    private current: { size: number; letter: string } = { size: 0, letter: '' };
-    private encoded: string = '';
-
-    static encode(input: string): string {
-      const result = input.split('').reduce(Encoder.reducer, new Encoder());
-      if (result.isNotCurrentEmpty()) {
-        result.encodeCurrent();
-      }
-      return result.encoded;
-    }
-
-    private static reducer(result: Encoder, letter: string): Encoder {
-      if (result.isSameLetter(letter) && result.isNotCurrentEmpty()) {
-        result.encodeCurrent();
-      }
-      result.updateCurrent(letter);
-      return result;
-    }
-
-    private isNotCurrentEmpty(): boolean {
-      return this.current.size > 0;
-    }
-
-    private isSameLetter(letter: string): boolean {
-      return this.current.letter !== letter;
-    }
-
-    private encodeCurrent(): void {
-      this.encoded += this.current.size + this.current.letter;
-      this.current.size = 0;
-    }
-
-    private updateCurrent(letter: string) {
-      this.current = { letter, size: ++this.current.size };
-    }
-  }
-
-  // Solution 2
-  function encodeFor(input: string): string {
-    let result = '', current = '', count = 0;
-    for (const char of input) {
-      if (char !== current && count > 0) {
-        result += count.toString() + current;
-        count = 0;
-      }
-      current = char;
-      ++count;
-    }
-    return result + (count ? count + current : '');
-  }
-
-  // Solution 3
-  type Result = { encoded: string, size: number, letter: string };
-  function encodeReduce(input: string): string {
-    const result = input.split('').reduce((result: Result, letter) => {
-      const isNewLetter = result.letter !== letter && result.size > 0;
-      return {
-        encoded: result.encoded + (isNewLetter ? result.size + result.letter : ''),
-        letter, size: (isNewLetter ? 1 : ++result.size),
-      };
-    }, { encoded: '', size: 0, letter: '' });
-    return result.encoded + (result.size ? result.size + result.letter : '');
-  }
-
-  function encodeClass(input: string): string {
-    return Encoder.encode(input);
-  }
-
-  describe.each([encodeFor, encodeReduce, encodeClass])('Test encoding functions %s', (encode) => {
+  describe.each([
+    encodeFor, encodeReduce, encodeClass,
+  ])('Test encoding functions %s', (encode) => {
 
     it('can encode a string', () => {
       expect(encode('aaaabbccc')).toEqual('4a2b3c');
