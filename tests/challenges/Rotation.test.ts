@@ -1,4 +1,4 @@
-import { rotate, rotN, rt } from '../../src/challenges/rotation';
+import { rotate, rotateArray, rotateSpaceO1, rotN, rt } from '../../src/challenges/rotation';
 
 describe('Rotation', () => {
 
@@ -59,7 +59,28 @@ describe('Rotation', () => {
             .toEqual(expected.toUpperCase().charCodeAt(0)));
       });
     });
+  });
 
+  /**
+   * Rotate the array to the right by steps
+   */
+  describe('with Array', () => {
+    const a = ['1', '2', '3', '4'];
+
+    it('rotates', () => {
+      expect(rotateArray(a, 2)).toEqual(['3', '4', '1', '2']);
+      expect(rotateSpaceO1(a, 2)).toEqual(['3', '4', '1', '2']);
+    });
+
+    it('handles negative step', () => {
+      expect(rotateArray(a, -1)).toEqual(a);
+      expect(rotateSpaceO1(a, 2)).toEqual(a);
+    });
+
+    it('handles steps that are too big', () => {
+      expect(rotateArray(a, 8)).toEqual(a);
+      expect(rotateSpaceO1(a, 8)).toEqual(a);
+    });
   });
 });
 
