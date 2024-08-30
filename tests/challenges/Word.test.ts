@@ -1,12 +1,9 @@
 /// <reference types="jest-extended" />
+import { wordCount, wordCut } from '../../src/challenges/word';
 
 describe('Word', () => {
 
   describe('Word Cut', () => {
-    function wordCut(input: string): Set<String> {
-      return new Set(input.replace(/[!?.,]/g, '').split(' '));
-    }
-
     it('cuts sentence into words', () => {
       expect([...wordCut('this is a text')]).toIncludeSameMembers(['this', 'is', 'a', 'text']);
     });
@@ -25,13 +22,6 @@ describe('Word', () => {
   });
 
   describe('Word Count', () => {
-
-    const wordCount = (input: string): Map<string, number> => {
-      const result: Map<string, number> = new Map();
-      input.toLowerCase().replace(/[!?.,]/g, '').split(' ')
-        .forEach(word => result.set(word, result.has(word) ? result.get(word)! + 1 : 1));
-      return result;
-    };
 
     it('counts', () => {
       expect(wordCount('hello')).toEqual(new Map(Object.entries({ hello: 1 })));
