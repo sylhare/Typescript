@@ -114,7 +114,7 @@
     # To limit depth of nested code blocks
     max-depth: [
         'error',
-        2
+        3
     ]
   }
 }
