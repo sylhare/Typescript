@@ -1,4 +1,5 @@
 import { minWindowAllResults, slidingWindowAllInOne } from '../../src/challenges/window/minWindow';
+import { slidingWindowWithMissing } from '../../src/challenges/window/slidingWindowWithMissing';
 import { slidingWindowMatchWindow } from '../../src/challenges/window/slidingWindowTwoMaps';
 
 /**
@@ -10,6 +11,7 @@ describe('Minimal Window Substring', () => {
 
   describe.each([
     { solution: minWindowAllResults },
+    { solution: slidingWindowMatchWindow },
     { solution: slidingWindowWithMissing },
     { solution: slidingWindowAllInOne },
   ])('Using %s', ({ solution }) => {
