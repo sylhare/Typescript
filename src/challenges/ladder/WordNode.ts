@@ -51,6 +51,12 @@ export class WordNode {
     return this.word === other.word;
   }
 
+  buildPotentialParents() {
+    this.word.split('').forEach((_, i) => {
+      const parent = this.word.slice(0, i) + '?' + this.word.slice(i + 1);
+      this.parents.push(parent);
+    });
+  }
 
   serialize(): string {
     const queue: WordNode[] = [this];

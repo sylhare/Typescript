@@ -32,4 +32,9 @@ describe('WordNode', () => {
     expect(abc.canLink(abx)).toEqual(true);
     expect(abc.canLink(aaa)).toEqual(false);
   });
+
+  it('creates possible parents', () => {
+    const node = new WordNode('aaa');
+    expect(node.parents).toEqual(['?aa', 'a?a', 'aa?']);
+  });
 });
