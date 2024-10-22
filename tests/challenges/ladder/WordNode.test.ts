@@ -20,9 +20,9 @@ describe('WordNode', () => {
     node.link(new WordNode('aba'));
     expect(node.serialize()).toEqual(
       'aaa: [aac, aba]\n' +
-      'aac: [abc]\n' +
-      'aba: []\n' +
-      'abc: []');
+      'aac: [aaa, abc]\n' +
+      'aba: [aaa]\n' +
+      'abc: [aac]');
   });
 
   it('can link', () => {
