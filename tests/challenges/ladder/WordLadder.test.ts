@@ -1,3 +1,7 @@
+import {
+  wordNodeTraverserV1,
+  wordNodeTraverserV2,
+} from '../../../src/challenges/ladder/wordNodeTraverser';
 import { wordLadder } from '../../../src/challenges/ladder/wordLadder';
 
 /**
@@ -10,6 +14,8 @@ import { wordLadder } from '../../../src/challenges/ladder/wordLadder';
  */
 describe('Word Ladder', () => {
   describe.each([
+    { solution: wordNodeTraverserV1 },
+    { solution: wordNodeTraverserV2 },
     { solution: wordLadder },
   ])('Using %s', ({ solution }) => {
     it('should transform a hit into a cog', () => {
