@@ -6,12 +6,12 @@ export class Product {
     Object.assign(this, product);
   }
 
-  toString() {
+  toString(): string {
     return 'This is ' + this.name;
   }
 }
 
-export function randomProduct() {
+export const randomProduct = (): Product => {
   const id = Math.floor(Math.random() * 100);
   return new Product({ id, name: `Product-${id}` });
-}
+};

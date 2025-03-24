@@ -1,4 +1,4 @@
-export function wordCut(input: string): Set<String> {
+export function wordCut(input: string): Set<string> {
   return new Set(input.replace(/[!?.,]/g, '').split(' '));
 }
 

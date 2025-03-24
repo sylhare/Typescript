@@ -2,7 +2,7 @@ interface Item {
   name: string;
 }
 
-const fetch = (url: string, options: any): Promise<string> => Promise.reject('rejects by default');
+const fetch = (_url: string, _options: Record<string, any>): Promise<string> => Promise.reject('rejects by default');
 
 export class MarketService {
   readonly url: string;
@@ -11,7 +11,7 @@ export class MarketService {
     this.url = 'localhost';
   }
 
-  info() {
+  info(): string {
     return 'MarketService allows its customer to buy and sell items';
   }
 

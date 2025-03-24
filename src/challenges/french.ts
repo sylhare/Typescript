@@ -13,7 +13,7 @@ export function french(input: string): string {
   }).join(' ');
 }
 
-export function frenchex(input: string) {
+export function frenchex(input: string): string {
   return input.replace(/\b(\w)(\w+)\b/g, (word: string, first: string, _: string) => {
     const groups = word.match(/\b([^\W_aeiou]+)(\w+)\b/)!!;
 
