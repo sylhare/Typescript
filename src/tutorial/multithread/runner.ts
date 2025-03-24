@@ -6,7 +6,7 @@ export function runner(workerData: { value: number }, skipWorker: boolean = fals
     return Promise.resolve(undefined);
   } else {
     return new Promise((resolve, reject) => {
-      const worker = new Worker(path.join(__dirname, 'worker.ts'), { workerData });
+      const worker = new Worker(path.join(__dirname, 'worker.js'), { workerData });
 
       worker.on('message', resolve);
       worker.on('error', reject);
