@@ -7,7 +7,7 @@
  * 3. Remove the number (backtrack) to try without it
  *
  * @example
- * generateSubsetsBacktrack([1, 2]) // returns [0, 1, 2, 3]
+ * generateSubsetsBacktrack([1, 2]) // returns [0, 1, 2, 3] (subsets sums []=0, [1]=1, [2]=2, [1,2]=3)
  * // Backtracking process:
  * // Start with [] = 0
  * // Include 1: [1] = 1
