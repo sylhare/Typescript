@@ -38,6 +38,30 @@ export function generateSubsetsBacktrack(nums: number[]): number[] {
   return result;
 }
 
+export function subsetsBacktrack(arr: number[]): Subset {
+  const subset: Subset = {};
+  for (let i = 0; i <= arr.length; i++) {
+    subset[i] = [];
+  }
+
+  function backtrack(i: number, currentSum: number, currentSize: number): void {
+    if (i === arr.length) {
+      subset[currentSize].push(currentSum);
+      return;
+    }
+    backtrack(i + 1, currentSum, currentSize);
+    backtrack(i + 1, currentSum + arr[i], currentSize + 1);
+  }
+
+  backtrack(0, 0, 0);
+
+  for (const subsetSize in subset) {
+    subset[subsetSize].sort((a, b) => a - b);
+  }
+
+  return subset;
+}
+
 /**
  * Generates all possible subset sums using an iterative approach.
  * For each number, we add it to all previously computed sums to generate new sums.
@@ -119,6 +143,45 @@ export function generateSubsetBitmasks(nums: number[]): number[] {
       }
     }
     subsetSums.push(sum);
+  }
+
+  return subsetSums;
+}
+
+export function subsetsBitmask(arr: number[]): Subset {
+  const subset: Subset = {};
+  const n = arr.length;
+
+  for (let i = 0; i < (1 << n); i++) {
+    let sum = 0;
+    let size = 0;
+    for (let j = 0; j < n; j++) {
+      if (i & (1 << j)) {
+        sum += arr[j];
+        size++;
+      }
+    }
+    if (!subset[size]) {
+      subset[size] = [];
+    }
+    subset[size].push(sum);
+  }
+
+  for (const subsetSize in subset) {
+    subset[subsetSize].sort((a, b) => a - b);
+  }
+
+  return subset;
+}
+
+export type Subset = { [key: number]: number[] };
+
+export function getSubsetSums(arr: number[], subsetMethod = subsetsBacktrack): number[] {
+  const subsets = subsetMethod(arr);
+  const subsetSums: number[] = [];
+
+  for (const key in subsets) {
+    subsetSums.push(...subsets[key]);
   }
 
   return subsetSums;
