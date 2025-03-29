@@ -1,4 +1,5 @@
 import { PartitionSum } from '../../../src/challenges/partition/PartitionSum';
+import { subsetsBacktrack, subsetsBitmask } from '../../../src/challenges/partition/subset';
 
 /**
  * Partition an array (of integers) into two arrays of equal length and,
@@ -7,7 +8,8 @@ import { PartitionSum } from '../../../src/challenges/partition/PartitionSum';
 describe('PartitionSum', () => {
 
   describe.each([
-    { algorithm: PartitionSum.Solve, name: 'PartitionSum' },
+    { algorithm: PartitionSum.Solve(subsetsBacktrack), name: 'PartitionSum Backtrack' },
+    { algorithm: PartitionSum.Solve(subsetsBitmask), name: 'PartitionSum Bitmask' },
   ])(`Test algorithm %s`, ({ algorithm, name }) => {
     describe.each([
       { input: [], expected: 0 },
