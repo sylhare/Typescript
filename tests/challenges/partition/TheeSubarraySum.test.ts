@@ -22,13 +22,6 @@ describe('maxSumOfThreeSubarray', () => {
     expect(result).toEqual([0, 2, 4]);
   });
 
-  it('should handle cases with all elements being the same', () => {
-    const nums = [5, 5, 5, 5, 5, 5, 5, 5];
-    const k = 3;
-    const result = maxSumOfThreeSubarray(nums, k);
-    expect(result).toEqual([0, 2, 4]);
-  });
-
   it('should handle cases with alternating patterns', () => {
     const nums = [1, 2, 1, 2, 1, 2, 1, 2, 1];
     const k = 2;
