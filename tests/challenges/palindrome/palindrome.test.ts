@@ -1,3 +1,6 @@
+import { isPalindrome } from '../../../src/challenges/palindrome/palindroms';
+import { palindromePairsTrie } from '../../../src/challenges/palindrome/tries';
+
 /**
  * In an array of words, find two of them that when concatenated gives a palindrome.
  * example:
@@ -5,12 +8,10 @@
  *   s + ees = sees
  *   p + "" = p
  */
-import { isPalindrome, palindromePairs } from '../../../src/challenges/tries/palindroms';
-
 describe('Palindrome Pair Algorithm', () => {
 
   describe.each([
-    { algorithm: palindromePairs, name: 'PalindromePairs' },
+    { algorithm: palindromePairsTrie, name: 'PalindromePairs' },
   ])(`Test algorithm %s`, ({ algorithm, name }) => {
     describe.each([
       { input: ['abcd', 'dcba', 'lls', 's', 'sssll'], expected: [[0, 1], [1, 0], [3, 2], [2, 4]] },
