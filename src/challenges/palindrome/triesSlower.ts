@@ -1,4 +1,5 @@
 import { isPalindromeAt } from './palindroms';
+import { TrieNode } from './trie';
 
 /**
  * Time complexity is still O(n^2).
@@ -13,18 +14,6 @@ export function palindromePairsTrie(words: string[]): number[][] {
   }
 
   return result;
-}
-
-class TrieNode {
-  children: Map<string, TrieNode>;
-  wordIndex: number;
-  palindromeIdxs: number[];
-
-  constructor() {
-    this.children = new Map();
-    this.wordIndex = -1;
-    this.palindromeIdxs = [];
-  }
 }
 
 function buildTrie(words: string[]): TrieNode {

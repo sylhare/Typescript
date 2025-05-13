@@ -1,16 +1,5 @@
 import { isPalindrome } from './palindroms';
-
-class TrieNode {
-  next: TrieNode[];
-  index: number;
-  list: number[];
-
-  constructor() {
-    this.next = new Array(26).fill(null);
-    this.index = -1;
-    this.list = [];
-  }
-}
+import { TrieNode } from './trie';
 
 export function palindromePairsTrieAlt(words: string[]): number[][] {
   const res: number[][] = [];
@@ -36,20 +25,20 @@ function addWord(root: TrieNode, word: string, index: number): void {
     }
 
     if (isPalindrome(word, 0, i)) {
-      root.list.push(index);
+      root.palindromeIdxs.push(index);
     }
 
     root = root.next[j];
   }
 
-  root.list.push(index);
-  root.index = index;
+  root.palindromeIdxs.push(index);
+  root.wordIndex = index;
 }
 
-function search(words: string[], i: number, root: TrieNode, res: number[][]): void {
+function search(words: string[], i: number, root: TrieNode, result: number[][]): void {
   for (let j = 0; j < words[i].length; j++) {
-    if (root.index >= 0 && root.index !== i && isPalindrome(words[i], j, words[i].length - 1)) {
-      res.push([i, root.index]);
+    if (root.wordIndex >= 0 && root.wordIndex !== i && isPalindrome(words[i], j, words[i].length - 1)) {
+      result.push([i, root.wordIndex]);
     }
 
     const charIndex = words[i].charCodeAt(j) - 'a'.charCodeAt(0);
@@ -57,8 +46,8 @@ function search(words: string[], i: number, root: TrieNode, res: number[][]): vo
     if (root === null) return;
   }
 
-  for (const j of root.list) {
+  for (const j of root.palindromeIdxs) {
     if (i === j) continue;
-    res.push([i, j]);
+    result.push([i, j]);
   }
 }

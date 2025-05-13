@@ -1,5 +1,5 @@
 import { isPalindromeAt } from '../../../src/challenges/palindrome/palindroms';
-import { palindromePairsTrie } from '../../../src/challenges/palindrome/tries';
+import { palindromePairsTrie } from '../../../src/challenges/palindrome/triesSlower';
 import { palindromePairsTrieAlt } from '../../../src/challenges/palindrome/triesFaster';
 import { palindromePairsMap } from '../../../src/challenges/palindrome/maps';
 
@@ -9,6 +9,9 @@ import { palindromePairsMap } from '../../../src/challenges/palindrome/maps';
  *   Hello + olleH = HelloolleH
  *   s + ees = sees
  *   p + "" = p
+ *
+ * The output needs to be a list of pairs,
+ * each pair containing the indexes of the words that combined make a palindrome.
  */
 describe('Palindrome Pair Algorithm', () => {
 
