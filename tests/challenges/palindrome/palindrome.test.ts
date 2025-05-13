@@ -1,5 +1,7 @@
-import { isPalindrome } from '../../../src/challenges/palindrome/palindroms';
+import { isPalindromeAt } from '../../../src/challenges/palindrome/palindroms';
 import { palindromePairsTrie } from '../../../src/challenges/palindrome/tries';
+import { palindromePairsTrieAlt } from '../../../src/challenges/palindrome/triesFaster';
+import { palindromePairsMap } from '../../../src/challenges/palindrome/maps';
 
 /**
  * In an array of words, find two of them that when concatenated gives a palindrome.
@@ -11,7 +13,9 @@ import { palindromePairsTrie } from '../../../src/challenges/palindrome/tries';
 describe('Palindrome Pair Algorithm', () => {
 
   describe.each([
-    { algorithm: palindromePairsTrie, name: 'PalindromePairs' },
+    { algorithm: palindromePairsTrie, name: 'PalindromePairs with Trie' },
+    { algorithm: palindromePairsTrieAlt, name: 'PalindromePairs with another Trie' },
+    { algorithm: palindromePairsMap, name: 'PalindromePairs with Map' },
   ])(`Test algorithm %s`, ({ algorithm, name }) => {
     describe.each([
       { input: ['abcd', 'dcba', 'lls', 's', 'sssll'], expected: [[0, 1], [1, 0], [3, 2], [2, 4]] },
@@ -25,35 +29,36 @@ describe('Palindrome Pair Algorithm', () => {
         expect(normalizePairs(result)).toEqual(normalizePairs(expected));
       });
     });
+
+    function normalizePairs(pairs: number[][]): number[][] {
+      return pairs.map(pair => pair.sort()).sort();
+    }
   });
 
-  function normalizePairs(pairs: number[][]): number[][] {
-    return pairs.map(pair => pair.sort()).sort();
-  }
-});
+  describe('isPalindrome', () => {
+    it('should return true for a palindrome word', () => {
+      expect(isPalindromeAt('racecar', 0)).toBe(true);
+    });
 
-describe('isPalindrome', () => {
-  it('should return true for a palindrome word', () => {
-    expect(isPalindrome('racecar', 0)).toBe(true);
+    it('should return false for a non-palindrome word', () => {
+      expect(isPalindromeAt('hello', 0)).toBe(false);
+    });
+
+    it('should return true for a substring that is a palindrome', () => {
+      expect(isPalindromeAt('xxcbabc', 2)).toBe(true);
+    });
+
+    it('should return true for an empty string', () => {
+      expect(isPalindromeAt('', 0)).toBe(true);
+    });
+
+    it('should return true for a single character', () => {
+      expect(isPalindromeAt('a', 0)).toBe(true);
+    });
+
+    it('should return false for a substring that is not a palindrome', () => {
+      expect(isPalindromeAt('abcdef', 2)).toBe(false); // Checks "cdef"
+    });
   });
 
-  it('should return false for a non-palindrome word', () => {
-    expect(isPalindrome('hello', 0)).toBe(false);
-  });
-
-  it('should return true for a substring that is a palindrome', () => {
-    expect(isPalindrome('xxcbabc', 2)).toBe(true);
-  });
-
-  it('should return true for an empty string', () => {
-    expect(isPalindrome('', 0)).toBe(true);
-  });
-
-  it('should return true for a single character', () => {
-    expect(isPalindrome('a', 0)).toBe(true);
-  });
-
-  it('should return false for a substring that is not a palindrome', () => {
-    expect(isPalindrome('abcdef', 2)).toBe(false); // Checks "cdef"
-  });
 });

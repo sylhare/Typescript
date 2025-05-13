@@ -1,4 +1,4 @@
-import { isPalindrome } from './palindroms';
+import { isPalindromeAt } from './palindroms';
 
 /**
  * Time complexity is still O(n^2).
@@ -35,7 +35,7 @@ function buildTrie(words: string[]): TrieNode {
     const reversedWord = words[wordIndex].split('').reverse().join('');
 
     for (let charIndex = 0; charIndex < reversedWord.length; charIndex++) {
-      if (isPalindrome(reversedWord, charIndex)) {
+      if (isPalindromeAt(reversedWord, charIndex)) {
         node.palindromeIdxs.push(wordIndex);
       }
 
@@ -55,7 +55,7 @@ function search(word: string, wordIndex: number, root: TrieNode, result: number[
   let node = root;
 
   for (let charIndex = 0; charIndex < word.length; charIndex++) {
-    if (node.wordIndex !== -1 && node.wordIndex !== wordIndex && isPalindrome(word, charIndex)) {
+    if (node.wordIndex !== -1 && node.wordIndex !== wordIndex && isPalindromeAt(word, charIndex)) {
       result.push([wordIndex, node.wordIndex]);
     }
 
