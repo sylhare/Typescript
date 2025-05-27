@@ -29,3 +29,18 @@ export function maxSubarraySumAlt(nums: number[]): number {
   return maxSum;
 }
 
+/**
+ * Building out all possible subarray and finding the maximum sum.
+ */
+export function maxSubarraySumAll(nums: number[]): number {
+  let maxSum = nums[0];
+  for (let i = 0; i < nums.length; i++) {
+    for (let j = i; j < nums.length; j++) {   // going from left to right (with right, the end of the array)
+    //for (let j = nums.length; j > i; j--) {         // going from right to left
+      const subArraySum = nums.slice(i, j + 1).reduce((sumAcc, current) => sumAcc + current, 0);
+      maxSum = Math.max(maxSum, subArraySum);
+    }
+  }
+  return maxSum;
+}
+

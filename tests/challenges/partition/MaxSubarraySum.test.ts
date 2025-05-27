@@ -1,9 +1,10 @@
-import { maxSubarraySum, maxSubarraySumAlt } from '../../../src/challenges/partition/MaxSubarraySum';
+import { maxSubarraySum, maxSubarraySumAll, maxSubarraySumAlt } from '../../../src/challenges/partition/MaxSubarraySum';
 
 describe('MaxSubarraySum', () => {
   describe.each([
     { algorithm: maxSubarraySum, name: 'Kadane with if/else' },
     { algorithm: maxSubarraySumAlt, name: 'Kadane with Max' },
+    { algorithm: maxSubarraySumAll, name: 'Brute force dynamic programming' },
   ])(`Test algorithm %s`, ({ algorithm, name }) => {
     describe.each([
       { input: [-1, -2, 3, 4, -5, 6], expected: 8 }, // Subarray: [3, 4, -5, 6]
