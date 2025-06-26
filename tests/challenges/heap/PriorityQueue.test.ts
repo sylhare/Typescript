@@ -1,11 +1,13 @@
 import { PriorityQueue } from '../../../src/challenges/heap/PriorityQueue';
 import { NumberPriorityQueue, NumberQueueFactory } from '../../../src/challenges/heap/NumberPriorityQueue';
 import { SimplePriorityQueue } from '../../../src/challenges/heap/SimplePriorityQueue';
+import { MinHeap } from '../../../src/challenges/heap/MinHeap';
 
 describe.each([
   { name: 'PriorityQueue', create: () => new PriorityQueue() },
   { name: 'NumberPriorityQueue', create: () => new NumberPriorityQueue() },
   { name: 'SimplePriorityQueue', create: () => new SimplePriorityQueue() },
+  { name: 'Heap', create: () => new MinHeap() },
 ])('$name', ({ create }) => {
   let queue: ReturnType<NumberQueueFactory>;
 
