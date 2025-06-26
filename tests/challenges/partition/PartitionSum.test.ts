@@ -8,15 +8,15 @@ import { subsetsBacktrack, subsetsBitmask } from '../../../src/challenges/partit
 describe('PartitionSum', () => {
 
   describe.each([
-    { algorithm: PartitionSum.Solve(subsetsBacktrack), name: 'PartitionSum Backtrack' },
-    { algorithm: PartitionSum.Solve(subsetsBitmask), name: 'PartitionSum Bitmask' },
-  ])(`Test algorithm %s`, ({ algorithm, name }) => {
+    { name: 'PartitionSum Backtrack', algorithm: PartitionSum.Solve(subsetsBacktrack) },
+    { name: 'PartitionSum Bitmask', algorithm: PartitionSum.Solve(subsetsBitmask) },
+  ])(`Test algorithm: $name`, ({ algorithm }) => {
     describe.each([
       { input: [], expected: 0 },
       { input: [-36, 36], expected: 72 },
       { input: [3, 9, 7, 3], expected: 2 },
       { input: [2, -1, 0, 4, -2, -9], expected: 0 },
-    ])(` ${name} with input $input`, ({ input, expected }) => {
+    ])(`with input $input`, ({ input, expected }) => {
       it(`returns ${expected}`, () => {
         expect(algorithm(input)).toEqual(expected);
       });
