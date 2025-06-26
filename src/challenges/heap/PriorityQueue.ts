@@ -3,28 +3,16 @@ import { INumberPriorityQueue } from './NumberPriorityQueue';
 export class PriorityQueue implements INumberPriorityQueue {
   private heap: number[] = [];
 
-  private getLeftChildIndex(parentIndex: number): number {
+  private leftChild(parentIndex: number): number {
     return 2 * parentIndex + 1;
   }
 
-  private leftChild(index: number): number {
-    return this.heap[this.getLeftChildIndex(index)];
-  }
-
-  private getRightChildIndex(parentIndex: number): number {
+  private rightChild(parentIndex: number): number {
     return 2 * parentIndex + 2;
   }
 
-  private rightChild(index: number): number {
-    return this.heap[this.getRightChildIndex(index)];
-  }
-
-  private getParentIndex(childIndex: number): number {
+  private parent(childIndex: number): number {
     return Math.floor((childIndex - 1) / 2);
-  }
-
-  private parent(index: number): number {
-    return this.heap[this.getParentIndex(index)];
   }
 
   private swap(indexOne: number, indexTwo: number): void {
@@ -55,28 +43,27 @@ export class PriorityQueue implements INumberPriorityQueue {
 
   private bubbleUp(): void {
     let index = this.heap.length - 1;
-    while (index > 0 && this.parent(index) > this.heap[index]) {
-      const parentIndex = this.getParentIndex(index);
-      this.swap(parentIndex, index);
-      index = parentIndex;
+    while (index > 0 && this.heap[this.parent(index)] > this.heap[index]) {
+      this.swap(index, this.parent(index));
+      index = this.parent(index);
     }
   }
 
   private bubbleDown(): void {
     let index = 0;
-    const length = this.heap.length;
-    while (this.getLeftChildIndex(index) < length) {
-      let smallerChildIndex = this.getLeftChildIndex(index);
-      const hasRightChild = this.getRightChildIndex(index) < length;
-      if (hasRightChild && this.rightChild(index) < this.leftChild(index)) {
-        smallerChildIndex = this.getRightChildIndex(index);
+    while (this.leftChild(index) < this.heap.length) {
+      let smallerChild = this.leftChild(index);
+      if (
+        this.rightChild(index) < this.heap.length &&
+        this.heap[this.rightChild(index)] < this.heap[smallerChild]
+      ) {
+        smallerChild = this.rightChild(index);
       }
-      if (this.heap[index] < this.heap[smallerChildIndex]) {
+      if (this.heap[index] <= this.heap[smallerChild]) {
         break;
-      } else {
-        this.swap(index, smallerChildIndex);
       }
-      index = smallerChildIndex;
+      this.swap(index, smallerChild);
+      index = smallerChild;
     }
   }
 }

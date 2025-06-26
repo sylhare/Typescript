@@ -59,10 +59,13 @@ export class GenericPriorityQueue<T> implements IGenericPriorityQueue<T> {
       const rightIdx = 2 * idx + 2;
       let swapIdx = idx;
 
-      if (leftIdx < length && this.comparator(this.heap[leftIdx], this.heap[swapIdx]) < 0) {
+      if (leftIdx < length && this.comparator(this.heap[leftIdx], element) < 0) {
         swapIdx = leftIdx;
       }
-      if (rightIdx < length && this.comparator(this.heap[rightIdx], this.heap[swapIdx]) < 0) {
+      if (rightIdx < length && (
+        (swapIdx === idx && this.comparator(this.heap[rightIdx], element) < 0) ||
+        (swapIdx !== idx && this.comparator(this.heap[rightIdx], this.heap[leftIdx]) < 0)
+      )) {
         swapIdx = rightIdx;
       }
       if (swapIdx === idx) break;
