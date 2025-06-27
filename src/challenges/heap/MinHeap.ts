@@ -68,3 +68,54 @@ export class MinHeap implements INumberPriorityQueue {
     }
   }
 }
+
+export function add(heap: number[], value: number): void {
+  heap.push(value);
+  let current = heap.length - 1;
+
+  while (current > 0) {
+    const parent = Math.floor((current - 1) / 2);
+
+    if (heap[parent] <= heap[current]) {
+      break;
+    }
+
+    [heap[current], heap[parent]] = [heap[parent], heap[current]];
+    current = parent;
+  }
+}
+
+export function removeRoot(heap: number[]): number | null {
+  if (heap.length === 0) {
+    return null;
+  }
+
+  const root = heap[0];
+  heap[0] = heap[heap.length - 1];
+  heap.pop();
+
+  let current = 0;
+  while (true) {
+    let smallest = current;
+    const left = 2 * current + 1;
+    const right = 2 * current + 2;
+
+    if (left < heap.length && heap[left] < heap[smallest]) {
+      smallest = left;
+    }
+
+    if (right < heap.length && heap[right] < heap[smallest]) {
+      smallest = right;
+    }
+
+    if (smallest === current) {
+      break;
+    }
+
+    [heap[current], heap[smallest]] = [heap[smallest], heap[current]];
+
+    current = smallest;
+  }
+
+  return root;
+}
