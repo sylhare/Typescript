@@ -1,4 +1,4 @@
-FROM node:16-slim as base
+FROM node:24-slim as base
 
 ENV HOME=/home/node
 WORKDIR /app
