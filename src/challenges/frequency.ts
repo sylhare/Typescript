@@ -16,6 +16,21 @@ export function frequencySortWithMap(s: string): string {
 }
 
 /**
+ * No string building, using the frequency or sorting by char on same frequency.
+ */
+export function frequencySortWithMapImproved(s: string): string {
+  const freq: Record<string, number> = {};
+  for (const char of s) {
+    freq[char] = (freq[char] || 0) + 1;
+  }
+
+  return s.split('').sort((a, b) => {
+    const freqDiff = freq[b] - freq[a];
+    return freqDiff !== 0 ? freqDiff : a.charCodeAt(0) - b.charCodeAt(0);
+  }).join('');
+}
+
+/**
  * Sorts the string based on character frequency using an ASCII array.
  * Characters with higher frequency come first; for equal frequency, characters
  * with lower ASCII values come first.
