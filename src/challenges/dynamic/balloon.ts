@@ -1,15 +1,24 @@
+/**
+ * nums is the padded array of balloons, where each balloon has a value.
+ * dp is a 2D array where dp[i][j] represents the maximum coins that can be collected
+ * by bursting all balloons between index i and j (exclusive).
+ * The algorithm iterates through all possible subarrays of balloons,
+ * and for each subarray, it considers every possible last balloon to burst.
+ *
+ * @param iNums
+ */
 export function maxCoins(iNums: number[]): number {
   const nums: number[] = [1, ...iNums.filter(i => i > 0), 1];
   const n: number = nums.length;
   const dp: number[][] = Array(n).fill(null).map(() => Array(n).fill(0));
 
-  for (let balloonRange = 2; balloonRange < n; balloonRange++) {
-    for (let left = 0; left < n - balloonRange; left++) {
-      const right = left + balloonRange;
-      for (let balloonToBurst = left + 1; balloonToBurst < right; balloonToBurst++) {
-        dp[left][right] = Math.max(
-          dp[left][right],
-          nums[left] * nums[balloonToBurst] * nums[right] + dp[left][balloonToBurst] + dp[balloonToBurst][right]
+  for (let subarrayLength = 2; subarrayLength < n; subarrayLength++) {
+    for (let i = 0; i < n - subarrayLength; i++) {
+      const j = i + subarrayLength;
+      for (let k = i + 1; k < j; k++) {
+        dp[i][j] = Math.max(
+          dp[i][j],
+          dp[i][k] + nums[i] * nums[k] * nums[j] + dp[k][j]
         );
       }
     }
