@@ -3,12 +3,13 @@
  * you gain coins equal to the product of the numbers on the surrounding balloons.
  * You need to find the maximum coins you can collect by bursting all the balloons.
  */
-import { maxCoins } from '../../../src/challenges/dynamic/balloon';
+import { maxCoins, maxCoinsRecursive } from '../../../src/challenges/dynamic/balloon';
 
 describe('Balloon burst', () => {
 
   describe.each([
-    { algorithm: maxCoins, name: '2D Dynamic Programming' },
+    { algorithm: maxCoins, name: 'Iterative approach' },
+    { algorithm: maxCoinsRecursive, name: 'Recursive approach' },
   ])('Test algorithm: $name', ({ algorithm }) => {
     describe.each([
       { input: [3, 1, 5, 8], expected: 167, name: 'Example 1' },
