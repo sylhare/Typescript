@@ -16,10 +16,7 @@ export function maxCoins(iNums: number[]): number {
     for (let i = 0; i < n - subarrayLength; i++) {
       const j = i + subarrayLength;
       for (let k = i + 1; k < j; k++) {
-        dp[i][j] = Math.max(
-          dp[i][j],
-          dp[i][k] + nums[i] * nums[k] * nums[j] + dp[k][j]
-        );
+        dp[i][j] = Math.max(dp[i][j], dp[i][k] + nums[i] * nums[k] * nums[j] + dp[k][j]);
       }
     }
   }
