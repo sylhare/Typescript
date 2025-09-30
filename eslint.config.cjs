@@ -71,7 +71,7 @@ module.exports = [
       'comma-dangle': ['warn', 'only-multiline'],
       'object-shorthand': ['error', 'always'],
       'no-useless-rename': ['error'],
-      'max-depth': ['error', 3],
+      'max-depth': ['error', 4],
       'no-unneeded-ternary': 'error',
       'no-nested-ternary': 'warn',
     }

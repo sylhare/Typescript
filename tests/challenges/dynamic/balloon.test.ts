@@ -19,6 +19,14 @@ describe('Balloon burst', () => {
       { input: [1, 5], expected: 10, name: 'No Problems' },
       { input: [], expected: 0, name: 'Empty array' },
       { input: [5], expected: 5, name: 'Single element' },
+      { input: [0, 0, 0], expected: 0, name: 'all zeros' },
+      { input: [7, 9, 8, 0, 2], expected: 637, name: 'balloons with zero' },
+      { input: [1, 0, 1], expected: 2, name: 'zero in middle' },
+      { input: [0, 1, 0], expected: 1, name: 'non-zero in middle' },
+      { input: [1, 1, 1], expected: 3, name: 'all same values' },
+      { input: [2, 4, 6], expected: 66, name: 'ascending values' },
+      { input: [6, 4, 2], expected: 66, name: 'descending values' },
+      { input: [1, 2, 3, 4, 5], expected: 110, name: 'sequential balloons' },
     ])(`$name`, ({ input, expected }) => {
       it(`returns ${expected}`, () => {
         expect(algorithm(input)).toEqual(expected);
