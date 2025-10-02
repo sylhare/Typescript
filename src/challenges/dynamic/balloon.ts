@@ -20,7 +20,6 @@ export function maxCoins(iNums: number[]): number {
       }
     }
   }
-  
   return dp[0][n - 1];
 }
 
