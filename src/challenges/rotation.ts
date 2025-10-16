@@ -20,24 +20,41 @@ const rot13 = (letter: string) => {
  * @param base is the starting point for the rotation.
  * @param range is the total number of possible values in the rotation.
  */
-export const rotN = (number: number, rotation = 5, base = 0, range = 10) => ((number - base + rotation) % range) + base;
+export const rotN = (number: number, rotation = 5, base = 0, range = 10): number => ((number - base + rotation) % range) + base;
 
 /**
  * rotate but I need... to... write... less... lines... 🤪
  * @param input
  */
-export const rt = (input: string) => input.split(' ').map(word => [...word]
+export const rt = (input: string): string => input.split(' ').map(word => [...word]
   .map(letter => /[,.?!]/.test(letter) ? letter : /\d/.test(letter) ? `${rotN(parseInt(letter))}` : rot13(letter))
   .join('')).join(' ');
 
-// ---------
-
+/**
+ * Rotates an array of strings to the right by a specified number of positions.
+ * Creates a new array rather than modifying the original.
+ *
+ * @param {string[]} a - The array to rotate
+ * @param {number} steps - The number of positions to rotate to the right
+ * @returns {string[]} A new array with elements rotated to the right
+ */
 export const rotateArray = (a: string[], steps: number): string[] => {
   if (steps < 0) return a;
-  return [...a.slice(steps), ...a.slice(0, steps)];
+  const effectiveSteps = steps % a.length;
+  if (effectiveSteps === 0) return [...a];
+  return [...a.slice(-effectiveSteps), ...a.slice(0, -effectiveSteps)];
 };
 
+/**
+ * Rotates an array of strings to the right by a specified number of positions.
+ * Modifies the array in-place using O(1) extra space with the three-reverse algorithm.
+ *
+ * @param {string[]} a - The array to rotate (will be modified)
+ * @param {number} steps - The number of positions to rotate to the right
+ * @returns {string[]} The modified array with elements rotated to the right
+ */
 export const rotateSpaceO1 = (a: string[], steps: number): string[] => {
+  if (steps < 0) return a;
   const reverse = (start: number, end: number) => {
     while (start < end) {
       [a[start], a[end]] = [a[end], a[start]];

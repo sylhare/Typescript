@@ -9,29 +9,22 @@ describe('Rotation', () => {
    */
   describe('with Alphabet', () => {
 
-    it('rotates word', () => {
-      expect(rotate('hello')).toEqual('uryyb');
-    });
-
-    it('rotates words', () => {
-      expect(rotate('hello world')).toEqual('uryyb jbeyq');
-    });
-
-    it('rotates with majuscule', () => {
-      expect(rotate('Abcd Xyz')).toEqual('Nopq Klm');
-    });
-
-    it('rotates handle punctuation', () => {
-      expect(rotate('Hello, world!')).toEqual('Uryyb, jbeyq!');
-    });
-
-    it('rotates numbers differently', () => {
-      expect(rotate('1 pieces of 54gr')).toEqual('6 cvrprf bs 09te');
-    });
-
-    it('works on it all', () => {
-      expect(rotate('WhUt an Am4Zing! Sho0Ww?!')).toEqual('JuHg na Nz9Mvat! Fub5Jj?!');
-      expect(rt('WhUt an Am4Zing! Sho0Ww?!')).toEqual('JuHg na Nz9Mvat! Fub5Jj?!');
+    describe.each([
+      { algorithm: rotate, name: 'rotate' },
+      { algorithm: rt, name: 'rt' },
+    ])('Test algorithm: $name', ({ algorithm }) => {
+      describe.each([
+        { input: 'hello', expected: 'uryyb', name: 'rotates word' },
+        { input: 'hello world', expected: 'uryyb jbeyq', name: 'rotates words' },
+        { input: 'Abcd Xyz', expected: 'Nopq Klm', name: 'rotates with majuscule' },
+        { input: 'Hello, world!', expected: 'Uryyb, jbeyq!', name: 'rotates handle punctuation' },
+        { input: '1 pieces of 54gr', expected: '6 cvrprf bs 09te', name: 'rotates numbers differently' },
+        { input: 'WhUt an Am4Zing! Sho0Ww?!', expected: 'JuHg na Nz9Mvat! Fub5Jj?!', name: 'works on it all' },
+      ])('$name', ({ input, expected }) => {
+        it(`returns ${expected}`, () => {
+          expect(algorithm(input)).toEqual(expected);
+        });
+      });
     });
 
     describe('rotN', () => {
@@ -65,21 +58,20 @@ describe('Rotation', () => {
    * Rotate the array to the right by steps
    */
   describe('with Array', () => {
-    const a = ['1', '2', '3', '4'];
-
-    it('rotates', () => {
-      expect(rotateArray(a, 2)).toEqual(['3', '4', '1', '2']);
-      expect(rotateSpaceO1(a, 2)).toEqual(['3', '4', '1', '2']);
-    });
-
-    it('handles negative step', () => {
-      expect(rotateArray(a, -1)).toEqual(a);
-      expect(rotateSpaceO1(a, 2)).toEqual(a);
-    });
-
-    it('handles steps that are too big', () => {
-      expect(rotateArray(a, 8)).toEqual(a);
-      expect(rotateSpaceO1(a, 8)).toEqual(a);
+    describe.each([
+      { algorithm: rotateArray, name: 'rotateArray' },
+      { algorithm: rotateSpaceO1, name: 'rotateSpaceO1' },
+    ])('Test algorithm: $name', ({ algorithm }) => {
+      describe.each([
+        { input: [['1', '2', '3', '4'], 2], expected: ['3', '4', '1', '2'], name: 'rotates by 2 steps' },
+        { input: [['1', '2', '3', '4'], -1], expected: ['1', '2', '3', '4'], name: 'returns original array for negative step' },
+        { input: [['1', '2', '3', '4'], 6], expected: ['3', '4', '1', '2'], name: 'handles steps that are too big' },
+      ])('$name', ({ input, expected }) => {
+        it(`returns ${JSON.stringify(expected)}`, () => {
+          const testArray = [...input[0] as string[]];
+          expect(algorithm(testArray, input[1] as number)).toEqual(expected);
+        });
+      });
     });
   });
 });
