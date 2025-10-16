@@ -1,4 +1,4 @@
-import { rotate, rotateArray, rotateSpaceO1, rotN, rt } from '../../src/challenges/rotation';
+import { rotate, rotateArray, rotateSpaceO1, rotN, rt, cipher } from '../../src/challenges/rotation';
 
 describe('Rotation', () => {
 
@@ -39,6 +39,13 @@ describe('Rotation', () => {
         expect(rotN(9, 2)).toEqual(1);
       });
 
+      it('rotates numbers by -2', () => {
+        expect(rotN(0, -2)).toEqual(8);
+        expect(rotN(0, -2, 0, 10)).toEqual(8); // 0 - 2 = -2 + 10 (default range) = 8
+        expect(rotN(9, -2)).toEqual(7);
+        expect(rotN(9, -2, 0, 10)).toEqual(7);
+      });
+
       describe.each([
         { base: 'a', test: 'a', expected: 'n' },
         { base: 'a', test: 'm', expected: 'z' },
@@ -50,6 +57,68 @@ describe('Rotation', () => {
         it(`by base ${base.toUpperCase().charCodeAt(0)}, range 26`, () =>
           expect(rotN(test.toUpperCase().charCodeAt(0), 13, base.toUpperCase().charCodeAt(0), 26))
             .toEqual(expected.toUpperCase().charCodeAt(0)));
+      });
+    });
+
+    /**
+     * Cipher method that rotates A-Z letters forward or backward
+     */
+    describe('cipher', () => {
+      it('rotates A forward by 2 to get C', () => {
+        expect(cipher('A', 2)).toEqual('C');
+      });
+
+      it('rotates A backward by 2 to get Y', () => {
+        expect(cipher('A', -2)).toEqual('Y');
+      });
+
+      it('handles wrapping around forward (Z + 1 = A)', () => {
+        expect(cipher('Z', 1)).toEqual('A');
+        expect(cipher('Z', 2)).toEqual('B');
+      });
+
+      it('handles wrapping around backward (A - 1 = Z)', () => {
+        expect(cipher('A', -1)).toEqual('Z');
+        expect(cipher('B', -2)).toEqual('Z');
+      });
+
+      it('converts lowercase to uppercase and rotates', () => {
+        expect(cipher('a', 2)).toEqual('C');
+        expect(cipher('z', 1)).toEqual('A');
+      });
+
+      it('filters out non-alphabetic characters', () => {
+        expect(cipher('123!@#', 5)).toEqual('');
+        expect(cipher('A1B2C3!', 1)).toEqual('BCD');
+      });
+
+      it('handles mixed case strings and filters non-letters', () => {
+        expect(cipher('Hello World!', 3)).toEqual('KHOORZRUOG');
+        expect(cipher('abc XYZ 123', -1)).toEqual('ZABWXY');
+      });
+
+      it('handles large rotation values', () => {
+        expect(cipher('A', 26)).toEqual('A'); // Full rotation = no change
+        expect(cipher('A', 27)).toEqual('B'); // 27 = 26 + 1
+        expect(cipher('A', -26)).toEqual('A'); // Full backward rotation = no change
+        expect(cipher('A', -27)).toEqual('Z'); // -27 = -26 - 1
+        expect(cipher('A', -1000)).toEqual('O'); // -1000 % 26 = 14, A + 14 = O
+      });
+
+      it('handles zero rotation', () => {
+        expect(cipher('Hello World!', 0)).toEqual('HELLOWORLD');
+      });
+
+      it('works with empty string', () => {
+        expect(cipher('', 5)).toEqual('');
+      });
+
+      it('Caesar cipher example (rotation 3)', () => {
+        expect(cipher('THE QUICK BROWN FOX', 3)).toEqual('WKHTXLFNEURZQIRA');
+      });
+
+      it('Caesar cipher example with negative rotation', () => {
+        expect(cipher('WKHTXLFNEURZQIRA', -3)).toEqual('THEQUICKBROWNFOX');
       });
     });
   });
