@@ -51,3 +51,34 @@ export function maxCoinsRecursive(iNums: number[]): number {
     return maxCoins;
   }
 }
+
+/**
+ * Find the balloon that gives the highest immediate reward
+ */
+export function greedyMaxCoins(nums: number[]): number {
+  if (nums.length === 0) return 0;
+
+  const balloons = [...nums];
+  let totalCoins = 0;
+
+  while (balloons.length > 0) {
+    let maxIndex = 0;
+    let maxReward = 0;
+
+    for (let i = 0; i < balloons.length; i++) {
+      const leftValue = i === 0 ? 1 : balloons[i - 1];
+      const rightValue = i === balloons.length - 1 ? 1 : balloons[i + 1];
+      const reward = leftValue * balloons[i] * rightValue;
+
+      if (reward > maxReward) {
+        maxReward = reward;
+        maxIndex = i;
+      }
+    }
+
+    totalCoins += maxReward;
+    balloons.splice(maxIndex, 1);
+  }
+
+  return totalCoins;
+}

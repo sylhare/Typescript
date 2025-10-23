@@ -3,7 +3,7 @@
  * you gain coins equal to the product of the numbers on the surrounding balloons.
  * You need to find the maximum coins you can collect by bursting all the balloons.
  */
-import { maxCoins, maxCoinsRecursive } from '../../../src/challenges/dynamic/balloon';
+import { greedyMaxCoins, maxCoins, maxCoinsRecursive } from '../../../src/challenges/dynamic/balloon';
 
 describe('Balloon burst', () => {
 
@@ -32,5 +32,11 @@ describe('Balloon burst', () => {
         expect(algorithm(input)).toEqual(expected);
       });
     });
+  });
+
+  it('does not work with greedy approach', () => {
+    expect(greedyMaxCoins([3, 1, 1, 1, 8])).toEqual(72); // works for some cases
+    const optimalSolution = 167; //
+    expect(greedyMaxCoins([1, 3, 1, 5, 8])).not.toEqual(optimalSolution);
   });
 });
