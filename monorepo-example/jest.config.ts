@@ -14,7 +14,8 @@ const config: Config = {
     '/dist/',
   ],
   moduleNameMapper: {
-    '^@acme-corp/(.*)$': '<rootDir>/packages/$1/'
+    '^@sylhare/is-even$': '<rootDir>/packages/is-even',
+    '^@sylhare/is-odd$': '<rootDir>/packages/is-odd'
   }
 };
 
