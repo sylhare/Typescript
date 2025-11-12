@@ -14,6 +14,8 @@ const config: Config = {
     '/dist/',
   ],
   moduleNameMapper: {
+    '^@sylhare/kafka$': '<rootDir>/packages/kafka/src',
+    '^@sylhare/redpanda$': '<rootDir>/packages/redpanda/src',
     '^@sylhare/is-even$': '<rootDir>/packages/is-even',
     '^@sylhare/is-odd$': '<rootDir>/packages/is-odd'
   }
