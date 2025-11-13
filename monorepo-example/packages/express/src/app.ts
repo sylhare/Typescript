@@ -1,5 +1,5 @@
 import express, { Request, Response } from 'express';
-import { up } from '@project/example';
+import { up } from '@sylhare/example';
 
 export const app = express();
 
