@@ -1,7 +1,7 @@
 {
-  "name": "monorepo-lerna",
+  "name": "monorepo",
   "version": "1.0.0",
-  "description": "testing lerna",
+  "description": "monorepo for projects",
   "scripts": {
     "test": "jest"
   },
