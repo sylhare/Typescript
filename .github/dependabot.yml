@@ -1,0 +1,61 @@
+version: 2
+updates:
+  # Root workspace npm dependencies
+  - package-ecosystem: "npm"
+    directory: "/"
+    schedule:
+      interval: "monthly"
+    open-pull-requests-limit: 10
+    groups:
+      typescript:
+        patterns:
+          - "typescript"
+          - "@types/*"
+      testing:
+        patterns:
+          - "jest"
+          - "@jest/*"
+          - "ts-jest"
+      linting:
+        patterns:
+          - "eslint"
+          - "@eslint/*"
+          - "eslint-*"
+
+  # Projects workspace npm dependencies
+  - package-ecosystem: "npm"
+    directory: "/projects"
+    schedule:
+      interval: "monthly"
+    open-pull-requests-limit: 10
+    groups:
+      typescript:
+        patterns:
+          - "typescript"
+          - "@types/*"
+      testing:
+        patterns:
+          - "jest"
+          - "@jest/*"
+          - "ts-jest"
+      kafka:
+        patterns:
+          - "kafkajs"
+          - "@types/kafkajs"
+      express:
+        patterns:
+          - "express"
+          - "@types/express"
+
+  # Docker dependencies
+  - package-ecosystem: "docker"
+    directory: "/"
+    schedule:
+      interval: "monthly"
+
+  # GitHub Actions (for when you add workflows)
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "monthly"
+
