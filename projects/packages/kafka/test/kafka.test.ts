@@ -1,4 +1,4 @@
-import { KafkaContainer, StartedKafkaContainer } from 'testcontainers';
+import { KafkaContainer, StartedKafkaContainer } from '@testcontainers/kafka';
 import { TProducer } from '../src/TProducer';
 import { TConsumer } from '../src/TConsumer';
 

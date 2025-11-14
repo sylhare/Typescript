@@ -12,10 +12,11 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "kafkajs": "^2.2.3"
+    "kafkajs": "^2.2.4"
   },
   "devDependencies": {
-    "testcontainers": "^9.0.1"
+    "@testcontainers/kafka": "^11.8.1",
+    "testcontainers": "^11.8.1"
   }
 }
 
