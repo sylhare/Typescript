@@ -3,7 +3,8 @@
   "version": "1.0.0",
   "description": "monorepo for projects",
   "scripts": {
-    "test": "jest"
+    "test": "jest",
+    "build": "tsc --project tsconfig.build.json"
   },
   "author": "",
   "license": "ISC",

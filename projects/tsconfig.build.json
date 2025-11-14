@@ -1,7 +1,14 @@
 {
+  "include": [
+    "packages/*/src/**/*",
+    "packages/*/index.ts",
+    "packages/*/types/**/*"
+  ],
   "exclude": [
     "**/*.test.ts",
     "**/*.stub.ts",
+    "**/test/**/*",
+    "jest.config.ts",
     "node_modules",
     "dist"
   ],
@@ -13,8 +20,11 @@
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
     "declaration": true,
+    "outDir": "./dist",
+    "rootDir": "./packages",
     "paths": {
-      "@sylhare/*": ["./packages/*/"]
-    }
+      "@sylhare/*": ["./packages/*/src", "./packages/*"]
+    },
+    "baseUrl": "."
   }
 }

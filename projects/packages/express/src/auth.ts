@@ -21,7 +21,7 @@ export function getToken(req: Request): string | undefined {
 
 export const userValidator = (): UnlessRequestHandler => {
   const middleware = (req: Request, res: Response, next: NextFunction): void => {
-    if (!req.user) res.status(401).send('Unauthorized').end();
+    if (!req['user']) res.status(401).send('Unauthorized').end();
     return next();
   };
   middleware.unless = unless;
