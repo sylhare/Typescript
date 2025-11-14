@@ -57,7 +57,7 @@ const config: Config = {
     }
   },
   watchPathIgnorePatterns: ['.idea'],
-  modulePathIgnorePatterns: ['<rootDir>/project/', '<rootDir>/monorepo-example/'],
+  modulePathIgnorePatterns: ['<rootDir>/projects/'],
   projects,
 };
 
