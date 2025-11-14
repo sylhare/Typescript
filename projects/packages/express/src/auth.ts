@@ -1,9 +1,7 @@
 import { expressjwt, GetVerificationKey } from 'express-jwt';
 import jwksRsa from 'jwks-rsa';
-import express, { NextFunction, Response, Request } from 'express';
-import { Params as UnlessOptions, unless } from 'express-unless';
-
-type UnlessRequestHandler = express.RequestHandler & { unless: typeof unless };
+import express, { NextFunction, Response, Request, RequestHandler } from 'express';
+import { Params as UnlessOptions, UnlessRequestHandler, unless } from 'express-unless';
 
 export const jwtValidator = (): UnlessRequestHandler => expressjwt({
   secret: jwksRsa.expressJwtSecret({
@@ -13,10 +11,10 @@ export const jwtValidator = (): UnlessRequestHandler => expressjwt({
   requestProperty: 'user', // To force it on 'req.user', default changed to 'req.auth'
   getToken,
   algorithms: ['RS256']
-});
+}) as UnlessRequestHandler;
 
 export function getToken(req: Request): string | undefined {
-  const header = req && req.headers && req.headers['Authorization'] as string | undefined;
+  const header = req && req.headers && req.headers['authorization'] as string | undefined;
   const splitHeader = header?.split(' ');
   return splitHeader && splitHeader[0] === 'Bearer' ? splitHeader[1] : undefined;
 }
@@ -27,10 +25,10 @@ export const userValidator = (): UnlessRequestHandler => {
     return next();
   };
   middleware.unless = unless;
-  return middleware;
+  return middleware as UnlessRequestHandler;
 };
 
 export const addAuthorizationMiddleware = (app: express.Application, unlessOptions: UnlessOptions): void => {
-  app.use(jwtValidator().unless(unlessOptions));
-  app.use(userValidator().unless(unlessOptions));
+  app.use(jwtValidator().unless(unlessOptions) as RequestHandler);
+  app.use(userValidator().unless(unlessOptions) as RequestHandler);
 };
