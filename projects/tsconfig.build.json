@@ -1,0 +1,30 @@
+{
+  "include": [
+    "packages/*/src/**/*",
+    "packages/*/index.ts",
+    "packages/*/types/**/*"
+  ],
+  "exclude": [
+    "**/*.test.ts",
+    "**/*.stub.ts",
+    "**/test/**/*",
+    "jest.config.ts",
+    "node_modules",
+    "dist"
+  ],
+  "compilerOptions": {
+    "target": "ES2015",
+    "module": "commonjs",
+    "strict": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "declaration": true,
+    "outDir": "./dist",
+    "rootDir": "./packages",
+    "paths": {
+      "@sylhare/*": ["./packages/*/src", "./packages/*"]
+    },
+    "baseUrl": "."
+  }
+}

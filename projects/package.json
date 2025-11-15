@@ -1,0 +1,22 @@
+{
+  "name": "monorepo",
+  "version": "1.0.0",
+  "description": "monorepo for projects",
+  "scripts": {
+    "test": "jest",
+    "build": "tsc --project tsconfig.build.json"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/jest": "^30.0.0",
+    "@types/node": "^24.10.1",
+    "jest": "^30.2.0",
+    "ts-jest": "^29.2.5",
+    "typescript": "^5.7.3"
+  },
+  "private": true,
+  "workspaces": [
+    "./packages/*"
+  ]
+}

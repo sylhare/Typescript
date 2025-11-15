@@ -1,0 +1,22 @@
+{
+  "name": "@sylhare/kafka",
+  "version": "1.0.0",
+  "description": "Kafka consumer and producer",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "compile": "rm -rf dist/* && tsc -p tsconfig.pkg.json",
+    "test": "jest"
+  },
+  "keywords": ["kafka", "consumer", "producer"],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "kafkajs": "^2.2.4"
+  },
+  "devDependencies": {
+    "@testcontainers/kafka": "^11.8.1",
+    "testcontainers": "^11.8.1"
+  }
+}
+

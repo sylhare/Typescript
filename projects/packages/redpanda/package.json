@@ -1,0 +1,21 @@
+{
+  "name": "@sylhare/redpanda",
+  "version": "1.0.0",
+  "description": "Redpanda consumer and producer using Kafka package",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "compile": "rm -rf dist/* && tsc -p tsconfig.pkg.json",
+    "test": "jest"
+  },
+  "keywords": ["redpanda", "kafka", "consumer", "producer"],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@sylhare/kafka": "^1.0.0"
+  },
+  "devDependencies": {
+    "testcontainers": "^11.8.1"
+  }
+}
+
