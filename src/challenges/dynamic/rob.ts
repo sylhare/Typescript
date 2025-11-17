@@ -43,3 +43,16 @@ export function robRecursive(nums: number[]): number {
 
   return robFrom(n - 1);
 }
+/**
+ * With house adjacent in a circle, we can't rob both the first and last house.
+ * So we consider two cases:
+ * 1. Rob houses from index 0 to n-2 (exclude the last house)
+ * 2. Rob houses from index 1 to n-1 (exclude the first house)
+ * The result is the maximum of the two cases.
+ */
+export function robII(nums: number[]): number {
+  const n = nums.length;
+  if (n === 0) return 0;
+  if (n === 1) return nums[0];
+  return Math.max(rob(nums.slice(1)), rob(nums.slice(0, n - 1)));
+}
