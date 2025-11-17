@@ -7,7 +7,8 @@ on:
     branches: [ main ]
 
 jobs:
-  build:
+  root-tests:
+    name: Root Tests (src)
     runs-on: ubuntu-latest
 
     strategy:
@@ -22,11 +23,39 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
 
-      - name: Build
+      - name: Install Dependencies
         run: npm install
+
+      - name: Build
+        run: npm run build
 
       - name: Test
         run: npm test
 
       - name: Lint
         run: npm run lint
+
+  projects-tests:
+    name: Projects Tests (monorepo)
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [ 23 ]
+
+    steps:
+      - uses: actions/checkout@main
+
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@main
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      - name: Install Dependencies
+        run: cd projects && npm install
+
+      - name: Build
+        run: cd projects && npm run build
+
+      - name: Test
+        run: cd projects && npm test
