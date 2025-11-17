@@ -1,4 +1,4 @@
-import { rob, robII, robRecursive } from '../../../src/challenges/dynamic/rob';
+import { rob, robII, robOtherExample, robRecursive } from '../../../src/challenges/dynamic/rob';
 
 describe('House Robber', () => {
 
@@ -12,6 +12,7 @@ describe('House Robber', () => {
    */
   describe.each([
     { algorithm: rob, name: 'Iterative DP' },
+    { algorithm: robOtherExample, name: 'Other iterative DP' },
     { algorithm: robRecursive, name: 'Recursive with Memoization' }
   ])('I. Test algorithm: $name', ({ algorithm }) => {
     describe.each([

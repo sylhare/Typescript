@@ -24,6 +24,16 @@ export function rob(nums: number[]): number {
   return dp[n - 1];
 }
 
+export function robOtherExample(num: number[]): number {
+  const n = num.length;
+  const dp = new Array(n + 1).fill(0);
+  dp[1] = num[0];
+  for (let i = 1; i < n; i++) {
+    dp[i + 1] = Math.max(dp[i], num[i] + dp[i - 1]);
+  }
+  return dp[n];
+}
+
 /**
  * We use recursion with memoization.
  * The memo array stores the maximum amount that can be robbed up to house i.
