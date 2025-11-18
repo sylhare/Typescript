@@ -8,20 +8,16 @@ on:
 
 jobs:
   root-tests:
-    name: Root Tests (src)
+    name: Tests (root)
     runs-on: ubuntu-latest
-
-    strategy:
-      matrix:
-        node-version: [ 23 ]
 
     steps:
       - uses: actions/checkout@main
 
-      - name: Use Node.js ${{ matrix.node-version }}
+      - name: Use Node.js 24
         uses: actions/setup-node@main
         with:
-          node-version: ${{ matrix.node-version }}
+          node-version: 24
 
       - name: Install Dependencies
         run: npm install
@@ -36,20 +32,16 @@ jobs:
         run: npm run lint
 
   projects-tests:
-    name: Projects Tests (monorepo)
+    name: Projects Tests
     runs-on: ubuntu-latest
-
-    strategy:
-      matrix:
-        node-version: [ 23 ]
 
     steps:
       - uses: actions/checkout@main
 
-      - name: Use Node.js ${{ matrix.node-version }}
+      - name: Use Node.js 24
         uses: actions/setup-node@main
         with:
-          node-version: ${{ matrix.node-version }}
+          node-version: 24
 
       - name: Install Dependencies
         run: cd projects && npm install
