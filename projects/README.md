@@ -1,6 +1,6 @@
-## Lerna monorepo
+## Project Monorepo
 
-Getting started with monorepo from this example.
+Side projects with typescript bundled into a Monorepo.
 
 Commands for this project from the top directory:
 
