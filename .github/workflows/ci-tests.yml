@@ -7,26 +7,47 @@ on:
     branches: [ main ]
 
 jobs:
-  build:
+  root-tests:
+    name: Tests (root)
     runs-on: ubuntu-latest
-
-    strategy:
-      matrix:
-        node-version: [ 23 ]
 
     steps:
       - uses: actions/checkout@main
 
-      - name: Use Node.js ${{ matrix.node-version }}
+      - name: Use Node.js 24
         uses: actions/setup-node@main
         with:
-          node-version: ${{ matrix.node-version }}
+          node-version: 24
+
+      - name: Install Dependencies
+        run: npm install
 
       - name: Build
-        run: npm install
+        run: npm run build
 
       - name: Test
         run: npm test
 
       - name: Lint
         run: npm run lint
+
+  projects-tests:
+    name: Projects
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@main
+
+      - name: Use Node.js 24
+        uses: actions/setup-node@main
+        with:
+          node-version: 24
+
+      - name: Install Dependencies
+        run: cd projects && npm install
+
+      - name: Build
+        run: cd projects && npm run build
+
+      - name: Test
+        run: cd projects && npm test

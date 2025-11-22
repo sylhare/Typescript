@@ -8,6 +8,8 @@
     "lint": "eslint --ext .ts src",
     "lint:fix": "eslint --fix src tests --ext=.ts",
     "test": "jest",
+    "test:root": "jest --selectProjects challenges models service tutorial",
+    "test:projects": "jest --selectProjects monorepo-general monorepo-express",
     "test:watch": "jest --verbose --detectOpenHandles",
     "test:cov": "jest --coverage",
     "start": "ts-node src/index.ts"
