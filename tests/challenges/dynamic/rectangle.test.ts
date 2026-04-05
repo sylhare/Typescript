@@ -24,7 +24,7 @@ describe('Maximal Rectangle', () => {
   describe.each([
     { algorithm: maximalRectangle, name: 'Dynamic Programming' },
   ])('Test algorithm: $name', ({ algorithm }: { algorithm: (matrix: string[][]) => number }) => {
-    it.each([
+    describe.each([
       { 
         input: [['1', '0', '1', '0', '0'], ['1', '0', '1', '1', '1'], ['1', '1', '1', '1', '1'], ['1', '0', '0', '1', '0']], 
         expected: 6, 
@@ -40,8 +40,10 @@ describe('Maximal Rectangle', () => {
         expected: 1, 
         name: 'Example 3: Single cell with 1' 
       },
-    ])('$name', ({ input, expected }: { input: string[][], expected: number }) => {
-      expect(algorithm(input)).toEqual(expected);
+    ])(`$name`, ({ input, expected }: { input: string[][], expected: number }) => {
+      it(`returns ${expected}`, () => {
+        expect(algorithm(input)).toEqual(expected);
+      });
     });
   });
 });

@@ -25,7 +25,6 @@ export function canCross(stones: number[]): boolean {
     for (const jump of dp.get(stone)!) {
       for (let nextJump = jump - 1; nextJump <= jump + 1; nextJump++) {
         const nextStone = stone + nextJump;
-         
         if (dp.has(nextStone)) {
           dp.get(nextStone)!.add(nextJump);
         }

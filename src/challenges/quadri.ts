@@ -2,23 +2,23 @@ export type Point = { x: number; y: number };
 export type Quad = [Point, Point, Point, Point];
 
 /**
- * Return the signed orientation (cross product) of the triplet (a,b,c).
-  * Positive if c is to the left of a->b, negative if to the right, zero if collinear.
-   */
+* Return the signed orientation (cross product) of the triplet (a,b,c).
+* Positive if c is to the left of a->b, negative if to the right, zero if collinear.
+*/
 export function orient(a: Point, b: Point, c: Point): number {
   return (b.x - a.x) * (c.y - a.y) - (b.y - a.y) * (c.x - a.x);
 }
 
 /**
-      * Return true if value is between a and b inclusive (works for numbers).
-       */
+* Return true if value is between a and b inclusive (works for numbers).
+*/
 export function between(a: number, b: number, value: number): boolean {
   return Math.min(a, b) - Number.EPSILON <= value && value <= Math.max(a, b) + Number.EPSILON;
 }
 
 /**
-          * Check if point p lies on the segment [a,b], allowing a small epsilon tolerance.
-           */
+* Check if point p lies on the segment [a,b], allowing a small epsilon tolerance.
+*/
 export function pointOnSegment(a: Point, b: Point, p: Point): boolean {
   const o = orient(a, b, p);
   if (Math.abs(o) > 1e-12) return false;
@@ -26,8 +26,8 @@ export function pointOnSegment(a: Point, b: Point, p: Point): boolean {
 }
 
 /**
-                  * Check if two closed segments [p1,p2] and [q1,q2] intersect (including endpoints and collinear overlap).
-                   */
+* Check if two closed segments [p1,p2] and [q1,q2] intersect (including endpoints and collinear overlap).
+*/
 export function segmentsIntersect(p1: Point, p2: Point, q1: Point, q2: Point): boolean {
   const o1 = orient(p1, p2, q1);
   const o2 = orient(p1, p2, q2);
@@ -43,9 +43,9 @@ export function segmentsIntersect(p1: Point, p2: Point, q1: Point, q2: Point): b
 }
 
 /**
-                                      * Check if infinite line through a->b intersects segment [p,q].
-                                       * True if endpoints are on opposite sides or at least one is collinear.
-                                        */
+* Check if infinite line through a->b intersects segment [p,q].
+* True if endpoints are on opposite sides or at least one is collinear.
+*/
 export function lineIntersectsSegment(a: Point, b: Point, p: Point, q: Point): boolean {
   const oa = orient(a, b, p);
   const ob = orient(a, b, q);
@@ -53,9 +53,9 @@ export function lineIntersectsSegment(a: Point, b: Point, p: Point, q: Point): b
 }
 
 /**
-                                               * Return true if point is inside (or on boundary of) a simple quadrilateral.
-                                                * Uses ray-casting winding algorithm which works for general simple polygons.
-                                                 */
+* Return true if point is inside (or on boundary of) a simple quadrilateral.
+* Uses ray-casting winding algorithm which works for general simple polygons.
+*/
 export function pointInQuad(pt: Point, quad: Quad): boolean {
   let inside = false;
   for (let i = 0; i < 4; i++) {
@@ -74,10 +74,10 @@ export function pointInQuad(pt: Point, quad: Quad): boolean {
 }
 
 /**
- * Check if the infinite line through points a and b intersects the quadrilateral.
- * Returns true when the line intersects any edge, passes through a vertex,
- * or all quad points are collinear with the line.
- */
+* Check if the infinite line through points a and b intersects the quadrilateral.
+* Returns true when the line intersects any edge, passes through a vertex,
+* or all quad points are collinear with the line.
+*/
 export function lineIntersectsQuadLine(a: Point, b: Point, quad: Quad): boolean {
   for (let i = 0; i < 4; i++) {
     const j = (i + 1) % 4;
@@ -88,9 +88,9 @@ export function lineIntersectsQuadLine(a: Point, b: Point, quad: Quad): boolean 
 }
 
 /**
- * Check if the line segment [a,b] intersects the quadrilateral.
- * Returns true if it intersects any quad edge, or if either endpoint lies inside the quad.
- */
+* Check if the line segment [a,b] intersects the quadrilateral.
+* Returns true if it intersects any quad edge, or if either endpoint lies inside the quad.
+*/
 export function lineSegmentIntersectsQuad(a: Point, b: Point, quad: Quad): boolean {
   for (let i = 0; i < 4; i++) {
     const j = (i + 1) % 4;
