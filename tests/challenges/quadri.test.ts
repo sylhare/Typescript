@@ -63,7 +63,7 @@ describe('Quadrilateral vs Line/Segment intersection tests', () => {
                                                                                                                                                                                                                                                                                                                                                                                                                                                             ] as Quad,
                                                                                                                                                                                                                                                                                                                                                                                                                                                             true,
       ],
-    ])('%s', (_name, a, b, quad, expected) => {
+    ])('%s', (_name: string, a: Point, b: Point, quad: Quad, expected: boolean) => {
       expect(lineIntersectsQuadLine(a, b, quad)).toBe(expected);
     });
   });
@@ -130,7 +130,7 @@ describe('Quadrilateral vs Line/Segment intersection tests', () => {
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       ] as Quad,
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       false,
       ],
-    ])('%s', (_name, a, b, quad, expected) => {
+    ])('%s', (_name: string, a: Point, b: Point, quad: Quad, expected: boolean) => {
       expect(lineSegmentIntersectsQuad(a, b, quad)).toBe(expected);
     });
   });
