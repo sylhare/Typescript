@@ -15,7 +15,7 @@ export function french(input: string): string {
 
 export function frenchex(input: string): string {
   return input.replace(/\b(\w)(\w+)\b/g, (word: string, first: string, _: string) => {
-    const groups = word.match(/\b([^\W_aeiou]+)(\w+)\b/)!!;
+    const groups = word.match(/\b([^\W_aeiou]+)(\w+)\b/)!;
 
     return /[aeiou]/i.test(first) ? word + 'way' :
       groups[2].replace(/^\w/, x => /[A-Z]/.test(first) ? x.toUpperCase() : x) +
