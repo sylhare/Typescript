@@ -74,9 +74,10 @@ export function pointInQuad(pt: Point, quad: Quad): boolean {
 }
 
 /**
-                                                                                              * Check if the infinite line through points a and b intersects the quadrilateral.
-                                                                                               * Returns true when the line intersects any edge, passes through a vertex, or all quad points are collinear with the line.
-                                                                                                */
+ * Check if the infinite line through points a and b intersects the quadrilateral.
+ * Returns true when the line intersects any edge, passes through a vertex,
+ * or all quad points are collinear with the line.
+ */
 export function lineIntersectsQuadLine(a: Point, b: Point, quad: Quad): boolean {
   for (let i = 0; i < 4; i++) {
     const j = (i + 1) % 4;
@@ -87,9 +88,9 @@ export function lineIntersectsQuadLine(a: Point, b: Point, quad: Quad): boolean 
 }
 
 /**
-                                                                                                                   * Check if the line segment [a,b] intersects the quadrilateral.
-                                                                                                                    * Returns true if it intersects any quad edge, or if either endpoint lies inside the quad.
-                                                                                                                     */
+ * Check if the line segment [a,b] intersects the quadrilateral.
+ * Returns true if it intersects any quad edge, or if either endpoint lies inside the quad.
+ */
 export function lineSegmentIntersectsQuad(a: Point, b: Point, quad: Quad): boolean {
   for (let i = 0; i < 4; i++) {
     const j = (i + 1) % 4;
