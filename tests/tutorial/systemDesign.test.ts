@@ -133,7 +133,7 @@ describe('System Design Coding', () => {
   });
 
   describe('Event Batching Queue', () => {
-    it('should batch events by size', (done) => {
+    it('should batch events by size', async () => {
       const processedBatches: any[][] = [];
       const queue = new EventBatchingQueue(
         3, // batch size
@@ -145,14 +145,12 @@ describe('System Design Coding', () => {
       queue.add({ id: 2, data: 'event2' });
       queue.add({ id: 3, data: 'event3' });
 
-      setTimeout(() => {
-        expect(processedBatches).toHaveLength(1);
-        expect(processedBatches[0]).toHaveLength(3);
-        done();
-      }, 100);
+      await new Promise((r) => setTimeout(r, 100));
+      expect(processedBatches).toHaveLength(1);
+      expect(processedBatches[0]).toHaveLength(3);
     });
 
-    it('should batch events by timeout', (done) => {
+    it('should batch events by timeout', async () => {
       const processedBatches: any[][] = [];
       const queue = new EventBatchingQueue(
         10, // large batch size
@@ -163,14 +161,12 @@ describe('System Design Coding', () => {
       queue.add({ id: 1, data: 'event1' });
       queue.add({ id: 2, data: 'event2' });
 
-      setTimeout(() => {
-        expect(processedBatches).toHaveLength(1);
-        expect(processedBatches[0]).toHaveLength(2);
-        done();
-      }, 150);
+      await new Promise((r) => setTimeout(r, 150));
+      expect(processedBatches).toHaveLength(1);
+      expect(processedBatches[0]).toHaveLength(2);
     });
 
-    it('should handle single event batches', (done) => {
+    it('should handle single event batches', async () => {
       const processedBatches: any[][] = [];
       const queue = new EventBatchingQueue(
         1, // batch size of 1
@@ -180,11 +176,9 @@ describe('System Design Coding', () => {
 
       queue.add({ id: 1, data: 'event1' });
 
-      setTimeout(() => {
-        expect(processedBatches).toHaveLength(1);
-        expect(processedBatches[0]).toHaveLength(1);
-        done();
-      }, 100);
+      await new Promise((r) => setTimeout(r, 100));
+      expect(processedBatches).toHaveLength(1);
+      expect(processedBatches[0]).toHaveLength(1);
     });
 
     it('should handle manual flush', () => {
@@ -215,7 +209,7 @@ describe('System Design Coding', () => {
       expect(processedBatches).toHaveLength(0);
     });
 
-    it('should handle multiple batches', (done) => {
+    it('should handle multiple batches', async () => {
       const processedBatches: any[][] = [];
       const queue = new EventBatchingQueue(
         2,
@@ -228,15 +222,13 @@ describe('System Design Coding', () => {
       queue.add({ id: 3 });
       queue.add({ id: 4 }); // triggers second batch
 
-      setTimeout(() => {
-        expect(processedBatches).toHaveLength(2);
-        expect(processedBatches[0]).toHaveLength(2);
-        expect(processedBatches[1]).toHaveLength(2);
-        done();
-      }, 100);
+      await new Promise((r) => setTimeout(r, 100));
+      expect(processedBatches).toHaveLength(2);
+      expect(processedBatches[0]).toHaveLength(2);
+      expect(processedBatches[1]).toHaveLength(2);
     });
 
-    it('should handle different event types', (done) => {
+    it('should handle different event types', async () => {
       const processedBatches: string[][] = [];
       const queue = new EventBatchingQueue<string>(
         2,
@@ -247,11 +239,9 @@ describe('System Design Coding', () => {
       queue.add('event1');
       queue.add('event2');
 
-      setTimeout(() => {
-        expect(processedBatches).toHaveLength(1);
-        expect(processedBatches[0]).toEqual(['event1', 'event2']);
-        done();
-      }, 100);
+      await new Promise((r) => setTimeout(r, 100));
+      expect(processedBatches).toHaveLength(1);
+      expect(processedBatches[0]).toEqual(['event1', 'event2']);
     });
   });
 });

@@ -67,7 +67,7 @@ describe('Sea creatures', () => {
 
     it('puts creatures in a safe or deadly object', () => {
       const reducedCreatures: SortedCreatures = sea.reduce((result: SortedCreatures, creature) => {
-        creature.deadly ? result.deadly.push(creature) : result.safe.push(creature);
+        if (creature.deadly) { result.deadly.push(creature); } else { result.safe.push(creature); }
         return result;
       }, { deadly: [], safe: [] });
 
