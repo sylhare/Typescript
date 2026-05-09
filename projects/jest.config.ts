@@ -5,9 +5,6 @@ const config: Config = {
   testEnvironment: 'node',
   collectCoverage: true,
   coverageDirectory: 'coverage',
-  collectCoverageFrom: [
-    'packages/**/*.{ts,js,jsx}'
-  ],
   coveragePathIgnorePatterns: [
     'jest.config.js',
     '/node_modules/',
@@ -24,6 +21,11 @@ const config: Config = {
       ],
       preset: 'ts-jest',
       testEnvironment: 'node',
+      transform: {
+        '^.+\\.ts$': ['ts-jest', {
+          tsconfig: '<rootDir>/tsconfig.test.json'
+        }]
+      },
       moduleNameMapper: {
         '^@acme-corp/(.*)$': '<rootDir>/packages/$1/',
         '^@sylhare/kafka$': '<rootDir>/packages/kafka/src',
@@ -42,6 +44,10 @@ const config: Config = {
           tsconfig: '<rootDir>/packages/express/tsconfig.pkg.json'
         }]
       },
+      collectCoverageFrom: [
+        'packages/express/**/*.{ts,js,jsx}',
+        'packages/example/**/*.{ts,js,jsx}',
+      ],
       moduleNameMapper: {
         '^@sylhare/example$': '<rootDir>/packages/example/src'
       }

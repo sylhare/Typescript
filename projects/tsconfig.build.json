@@ -24,7 +24,6 @@
     "rootDir": "./packages",
     "paths": {
       "@sylhare/*": ["./packages/*/src", "./packages/*"]
-    },
-    "baseUrl": "."
+    }
   }
 }
