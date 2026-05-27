@@ -1,7 +1,7 @@
 export type Point = { x: number; y: number };
 export type Quad = [Point, Point, Point, Point];
 
-const EPS = 1e-12;
+export const EPS = 1e-12;
 
 export function orient(a: Point, b: Point, c: Point): number {
   return (b.x - a.x) * (c.y - a.y) - (b.y - a.y) * (c.x - a.x);
@@ -27,13 +27,17 @@ export function segmentsIntersect(p1: Point, p2: Point, q1: Point, q2: Point): b
   return (o1 > 0) !== (o2 > 0) && (o3 > 0) !== (o4 > 0);
 }
 
-function lineIntersectsSegment(a: Point, b: Point, p: Point, q: Point): boolean {
+export function lineIntersectsSegment(a: Point, b: Point, p: Point, q: Point): boolean {
   const oa = orient(a, b, p);
   const ob = orient(a, b, q);
   return Math.abs(oa) <= EPS || Math.abs(ob) <= EPS || (oa > 0) !== (ob > 0);
 }
 
-// Ray-casting winding: works for any simple (non-self-intersecting) polygon.
+/**
+ * Determines whether a point lies inside or on the boundary of a general quadrilateral.
+ * Uses ray-casting (winding number parity): works for any simple (non-self-intersecting)
+ * polygon, including concave quads. Points exactly on an edge are treated as inside.
+ */
 export function pointInQuad(pt: Point, quad: Quad): boolean {
   let inside = false;
   for (let i = 0; i < 4; i++) {

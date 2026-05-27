@@ -1,7 +1,5 @@
 import { Point, Para, pointInPara, lineIntersectsPara, lineSegmentIntersectsPara } from '../../../src/challenges/quadri/parallelogram';
 
-// Parallelogram sheared from a 4×3 rectangle: bottom-left (0,0), bottom-right (4,0), top-right (5,3), top-left (1,3)
-// Sides: bottom y=0 x∈[0,4], right slant from (4,0)→(5,3), top y=3 x∈[1,5], left slant from (0,0)→(1,3)
 const para: Para = [{ x: 0, y: 0 }, { x: 4, y: 0 }, { x: 5, y: 3 }, { x: 1, y: 3 }];
 
 describe('Parallelogram', () => {
@@ -11,7 +9,6 @@ describe('Parallelogram', () => {
       ['point on bottom edge',               { x: 2, y: 0 },     true],
       ['point on slanted right edge midpoint', { x: 4.5, y: 1.5 }, true],
       ['point on top-left corner',           { x: 1, y: 3 },     true],
-      // The slant means x must be > y/3 on the left side, so (0,1.5) is outside
       ['point to the left of slanted edge',  { x: 0, y: 1.5 },   false],
       ['point above the parallelogram',      { x: 3, y: 4 },     false],
       ['point below the parallelogram',      { x: 3, y: -1 },    false],
@@ -28,7 +25,7 @@ describe('Parallelogram', () => {
       ['line collinear with bottom edge',          { x: 0, y: 0 },    { x: 4, y: 0 },    true],
       ['line passing through bottom-left corner',  { x: -1, y: -1 },  { x: 0, y: 0 },    true],
       ['horizontal line above parallelogram',      { x: 0, y: 4 },    { x: 5, y: 4 },    false],
-      // Vertical line at x=0 only touches the bottom-left corner (0,0) → true
+      ['vertical line at x=0 touches corner',     { x: 0, y: 0 },    { x: 0, y: 3 },    true],
       ['vertical line just to the left (x=-0.1)', { x: -0.1, y: 0 }, { x: -0.1, y: 3 }, false],
     ])('%s', (_name, a, b, expected) => {
       expect(lineIntersectsPara(a, b, para)).toBe(expected);

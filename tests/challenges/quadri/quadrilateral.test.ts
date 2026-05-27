@@ -1,10 +1,6 @@
 import { Point, Quad, pointInQuad, lineIntersectsQuadLine, lineSegmentIntersectsQuad } from '../../../src/challenges/quadri/quadrilateral';
 
-// Irregular (non-rectangular, non-parallelogram) quadrilateral
-// Vertices: (0,0), (6,1), (5,5), (1,4)  — bounding box x∈[0,6], y∈[0,5]
 const quad: Quad = [{ x: 0, y: 0 }, { x: 6, y: 1 }, { x: 5, y: 5 }, { x: 1, y: 4 }];
-
-// Degenerate quad where all 4 points are collinear (flat, zero-area shape)
 const flatQuad: Quad = [{ x: 0, y: 0 }, { x: 2, y: 0 }, { x: 4, y: 0 }, { x: 6, y: 0 }];
 
 describe('Quadrilateral', () => {
@@ -39,60 +35,17 @@ describe('Quadrilateral', () => {
 
   describe('lineSegmentIntersectsQuad (finite segment)', () => {
     it.each<[string, Point, Point, Quad, boolean]>([
-      // ── endpoint inside ──────────────────────────────────────────────────────
-      [
-        'one endpoint inside quad',
-        { x: 3, y: 2 }, { x: 10, y: 10 }, quad, true,
-      ],
-      // ── endpoint on boundary ─────────────────────────────────────────────────
-      [
-        'endpoint on quad edge (boundary)',
-        { x: 3, y: 0.5 }, { x: 3, y: -2 }, quad, true,
-      ],
-      // ── outside crossing vertically ──────────────────────────────────────────
-      // Both endpoints outside y-range [0,5]; segment crosses the quad top-to-bottom
-      [
-        'segment outside crossing quad vertically',
-        { x: 3, y: -2 }, { x: 3, y: 7 }, quad, true,
-      ],
-      // ── outside crossing horizontally ────────────────────────────────────────
-      // Both endpoints outside x-range [0,6]; segment crosses the quad left-to-right
-      [
-        'segment outside crossing quad horizontally',
-        { x: -2, y: 2 }, { x: 8, y: 2 }, quad, true,
-      ],
-      // ── diagonal crossing, endpoints outside bounding box ────────────────────
-      // Endpoints (-2,-1) and (9,7) are outside x∈[0,6] and y∈[0,5]; segment crosses interior
-      [
-        'diagonal segment with both endpoints outside x,y bounding box',
-        { x: -2, y: -1 }, { x: 9, y: 7 }, quad, true,
-      ],
-      // ── non-crossing (false cases) ────────────────────────────────────────────
-      [
-        'segment entirely outside quad (no intersection)',
-        { x: -1, y: 2 }, { x: -0.5, y: 2 }, quad, false,
-      ],
-      [
-        'segment outside, parallel to an edge, no crossing',
-        { x: -2, y: -2 }, { x: -1, y: -1 }, quad, false,
-      ],
-      // ── degenerate flat quad ──────────────────────────────────────────────────
-      [
-        'segment overlapping flat quad (collinear)',
-        { x: 1, y: 0 }, { x: 5, y: 0 }, flatQuad, true,
-      ],
-      [
-        'vertical segment crossing through flat quad',
-        { x: 3, y: -1 }, { x: 3, y: 1 }, flatQuad, true,
-      ],
-      [
-        'segment collinear but disjoint from flat quad',
-        { x: 7, y: 0 }, { x: 9, y: 0 }, flatQuad, false,
-      ],
-      [
-        'segment parallel above flat quad (no intersection)',
-        { x: 1, y: 1 }, { x: 5, y: 1 }, flatQuad, false,
-      ],
+      ['one endpoint inside quad',                                    { x: 3, y: 2 },   { x: 10, y: 10 }, quad, true],
+      ['endpoint on quad edge (boundary)',                            { x: 3, y: 0.5 }, { x: 3, y: -2 },  quad, true],
+      ['segment outside crossing quad vertically',                    { x: 3, y: -2 },  { x: 3, y: 7 },   quad, true],
+      ['segment outside crossing quad horizontally',                  { x: -2, y: 2 },  { x: 8, y: 2 },   quad, true],
+      ['diagonal segment with both endpoints outside bounding box',   { x: -2, y: -1 }, { x: 9, y: 7 },   quad, true],
+      ['segment entirely outside quad (no intersection)',             { x: -1, y: 2 },  { x: -0.5, y: 2 }, quad, false],
+      ['segment outside, parallel to an edge, no crossing',          { x: -2, y: -2 }, { x: -1, y: -1 }, quad, false],
+      ['segment overlapping flat quad (collinear)',                   { x: 1, y: 0 },   { x: 5, y: 0 },   flatQuad, true],
+      ['vertical segment crossing through flat quad',                 { x: 3, y: -1 },  { x: 3, y: 1 },   flatQuad, true],
+      ['segment collinear but disjoint from flat quad',              { x: 7, y: 0 },   { x: 9, y: 0 },   flatQuad, false],
+      ['segment parallel above flat quad (no intersection)',         { x: 1, y: 1 },   { x: 5, y: 1 },   flatQuad, false],
     ])('%s', (_name, a, b, q, expected) => {
       expect(lineSegmentIntersectsQuad(a, b, q)).toBe(expected);
     });
