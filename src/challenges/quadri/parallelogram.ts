@@ -1,4 +1,4 @@
-import { Point, EPS, orient, pointOnSegment, segmentsIntersect, lineIntersectsSegment } from './quadrilateral';
+import { Point, orient, pointOnSegment } from './quadrilateral';
 
 export type { Point };
 /**
@@ -21,18 +21,4 @@ export function pointInPara(pt: Point, para: Para): boolean {
   }
   const signs = para.map((p, i) => orient(p, para[(i + 1) % 4], pt));
   return signs.every((s) => s > 0) || signs.every((s) => s < 0);
-}
-
-export function lineIntersectsPara(a: Point, b: Point, para: Para): boolean {
-  for (let i = 0; i < 4; i++) {
-    if (lineIntersectsSegment(a, b, para[i], para[(i + 1) % 4])) return true;
-  }
-  return para.every((p) => Math.abs(orient(a, b, p)) <= EPS);
-}
-
-export function lineSegmentIntersectsPara(a: Point, b: Point, para: Para): boolean {
-  for (let i = 0; i < 4; i++) {
-    if (segmentsIntersect(a, b, para[i], para[(i + 1) % 4])) return true;
-  }
-  return pointInPara(a, para) || pointInPara(b, para);
 }
