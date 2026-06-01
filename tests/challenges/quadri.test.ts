@@ -1,4 +1,4 @@
-import { Point, Quad, lineIntersectsQuadLine, lineSegmentIntersectsQuad } from '../../src/challenges/quadri';
+import { Point, Quad, lineIntersectsQuadLine, lineSegmentIntersectsQuad } from '../../src/challenges/quadri/quadrilateral';
 
 const unitSquare: Quad = [
   { x: 0, y: -1 },
