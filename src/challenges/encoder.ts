@@ -12,7 +12,7 @@ class Encoder {
   }
 
   private static reducer(result: Encoder, letter: string): Encoder {
-    if (result.isSameLetter(letter) && result.isNotCurrentEmpty()) {
+    if (result.isDifferentLetter(letter) && result.isNotCurrentEmpty()) {
       result.encodeCurrent();
     }
     result.updateCurrent(letter);
@@ -23,7 +23,7 @@ class Encoder {
     return this.current.size > 0;
   }
 
-  private isSameLetter(letter: string): boolean {
+  private isDifferentLetter(letter: string): boolean {
     return this.current.letter !== letter;
   }
 
