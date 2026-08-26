@@ -42,3 +42,4 @@ typings/
 # You should not git ignore that on real projects
 package-lock.json
 
+**/.DS_Store
