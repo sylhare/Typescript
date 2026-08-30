@@ -1,0 +1,12 @@
+{
+  "extends": "../../tsconfig.json",
+  "compilerOptions": {
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "target": "ES2020",
+    "lib": ["ES2020", "DOM"],
+    "types": ["jest", "node"],
+    "declaration": false
+  },
+  "include": ["src/**/*", "test/**/*", "e2e/**/*"]
+}
