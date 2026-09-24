@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'" />
+    <title>Electron Counter</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <main class="card">
+      <h1>Electron Counter</h1>
+      <span id="count">0</span>
+      <div class="buttons">
+        <button id="decrement" class="secondary">-</button>
+        <button id="reset" class="secondary">Reset</button>
+        <button id="increment" class="primary">+</button>
+      </div>
+      <p id="versions"></p>
+    </main>
+    <script type="module" src="./renderer.js"></script>
+  </body>
+</html>
