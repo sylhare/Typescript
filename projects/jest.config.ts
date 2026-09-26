@@ -51,6 +51,17 @@ const config: Config = {
       moduleNameMapper: {
         '^@sylhare/example$': '<rootDir>/packages/example/src'
       }
+    },
+    {
+      displayName: 'electron',
+      testMatch: ['<rootDir>/packages/electron/test/**/*.test.ts'],
+      preset: 'ts-jest',
+      testEnvironment: 'node',
+      transform: {
+        '^.+\\.ts$': ['ts-jest', {
+          tsconfig: '<rootDir>/packages/electron/tsconfig.jest.json'
+        }]
+      }
     }
   ]
 };

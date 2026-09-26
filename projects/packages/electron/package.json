@@ -1,0 +1,17 @@
+{
+  "name": "@sylhare/electron",
+  "description": "Minimal Electron app example",
+  "private": true,
+  "version": "1.0.0",
+  "main": "dist/main.js",
+  "scripts": {
+    "compile": "rm -rf dist && tsc -p tsconfig.main.json && tsc -p tsconfig.renderer.json && cp src/renderer/index.html src/renderer/styles.css dist/renderer/",
+    "start": "npm run compile && electron dist/main.js",
+    "test": "jest",
+    "test:e2e": "npm run compile && jest --config jest.e2e.config.ts"
+  },
+  "devDependencies": {
+    "electron": "^33.2.0",
+    "playwright-core": "^1.49.0"
+  }
+}
