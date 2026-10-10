@@ -11,7 +11,7 @@
     "test:e2e": "npm run compile && jest --config jest.e2e.config.ts"
   },
   "devDependencies": {
-    "electron": "^33.2.0",
+    "electron": "^44.4.5",
     "playwright-core": "^1.49.0"
   }
 }
