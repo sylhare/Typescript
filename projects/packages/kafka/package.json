@@ -15,8 +15,8 @@
     "kafkajs": "^2.2.4"
   },
   "devDependencies": {
-    "@testcontainers/kafka": "^12.0.1",
-    "testcontainers": "^12.1.0"
+    "@testcontainers/kafka": "^12.2.1",
+    "testcontainers": "^12.2.1"
   }
 }
 
